@@ -10,7 +10,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
-<script src="image-slot.js"></script>
 <style>doc-page:not(:defined){visibility:hidden}</style>
 <style>
 :root{--navy:#0D2438;--navy2:#12314A;--blue:#1B547E;--blue-l:#2E86C1;--blue-pale:#EAF2F8;--green:#1E9E6D;--green-d:#157A55;--green-pale:#E8F6EF;--amber:#B8860B;--amber-pale:#FBF2DE;--red:#B3261E;--red-pale:#FBEAE9;--ink:#0F1B24;--muted:#5B6672;--muted2:#66707D;--border:#E4E9ED;--bg-soft:#F6F8FA;--fs:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;}
@@ -184,8 +183,8 @@ body{font-family:var(--fs);color:var(--ink);}
     <p class="rp-p">Depuis le village de Kalyves, le trajet prend environ 6 minutes en voiture. La route départementale est bien entretenue jusqu'à un embranchement, suivi d'environ 200 derniers mètres de chemin non goudronné (terre et gravier compacté). Le passage reste praticable avec un véhicule normal par temps sec ; en période de pluie, une prudence particulière est recommandée sur ce dernier tronçon.</p>
     <p class="rp-p" style="margin-top:10px;">Le portail d'entrée est automatique et fonctionnel (testé sur place). La cour intérieure permet de stationner 2 à 3 véhicules sans difficulté. Aucune signalétique de servitude de passage n'a été observée sur le chemin d'accès — point à confirmer auprès de l'agence ou d'un avocat (voir section Questions, page 10).</p>
     <div class="rp-grid2" style="margin-top:20px;">
-      <div><div class="rp-photo"><image-slot id="rp-photo-1" shape="rect" placeholder="Photo — portail d'entrée et cour de stationnement"></image-slot></div><div class="rp-cap">Portail d'entrée et cour de stationnement</div></div>
-      <div><div class="rp-photo"><image-slot id="rp-photo-2" shape="rect" placeholder="Photo — derniers 200m d'accès, chemin non goudronné"></image-slot></div><div class="rp-cap">Derniers 200m d'accès (chemin non goudronné)</div></div>
+      <div><div class="rp-photo"><div id="rp-photo-1" style="width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:#F6F8FA;color:#9CA3AF;font-size:13px;text-align:center;padding:20px;">Photo — portail d'entrée et cour de stationnement</div></div><div class="rp-cap">Portail d'entrée et cour de stationnement</div></div>
+      <div><div class="rp-photo"><div id="rp-photo-2" style="width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:#F6F8FA;color:#9CA3AF;font-size:13px;text-align:center;padding:20px;">Photo — derniers 200m d'accès, chemin non goudronné</div></div><div class="rp-cap">Derniers 200m d'accès (chemin non goudronné)</div></div>
     </div>
   </div>
   <div class="rp-foot"><span>Document confidentiel — usage strictement personnel</span><span>Page 4 / 11</span></div>
@@ -199,8 +198,8 @@ body{font-family:var(--fs);color:var(--ink);}
     <p class="rp-p">Le terrain est entouré de parcelles d'oliviers en exploitation. Une maison voisine est visible à environ 80 mètres à l'ouest, d'aspect entretenu, sans vis-à-vis direct sur la piscine ou la terrasse principale. L'ambiance générale est rurale et calme ; une activité agricole occasionnelle a été observée le jour de la visite (passage d'un tracteur sur le chemin voisin).</p>
     <p class="rp-p" style="margin-top:10px;">La plage de Kalyves se trouve à environ 2,3 km (7 minutes en voiture). Les commerces de première nécessité (supérette, boulangerie, pharmacie) sont accessibles à Kalyves village en moins de 10 minutes. Aucun chantier, terrain vague ou activité bruyante n'a été identifié aux abords immédiats du bien au moment de la visite.</p>
     <div class="rp-grid2" style="margin-top:20px;">
-      <div><div class="rp-photo"><image-slot id="rp-photo-3" shape="rect" placeholder="Photo — parcelles voisines et oliveraie"></image-slot></div><div class="rp-cap">Vue sur les parcelles voisines (oliveraie)</div></div>
-      <div><div class="rp-photo"><image-slot id="rp-photo-4" shape="rect" placeholder="Photo — panorama depuis l'entrée du terrain"></image-slot></div><div class="rp-cap">Panorama depuis l'entrée du terrain</div></div>
+      <div><div class="rp-photo"><div id="rp-photo-3" style="width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:#F6F8FA;color:#9CA3AF;font-size:13px;text-align:center;padding:20px;">Photo — parcelles voisines et oliveraie</div></div><div class="rp-cap">Vue sur les parcelles voisines (oliveraie)</div></div>
+      <div><div class="rp-photo"><div id="rp-photo-4" style="width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:#F6F8FA;color:#9CA3AF;font-size:13px;text-align:center;padding:20px;">Photo — panorama depuis l'entrée du terrain</div></div><div class="rp-cap">Panorama depuis l'entrée du terrain</div></div>
     </div>
   </div>
   <div class="rp-foot"><span>Document confidentiel — usage strictement personnel</span><span>Page 5 / 11</span></div>
@@ -215,8 +214,8 @@ body{font-family:var(--fs);color:var(--ink);}
     <p class="rp-p" style="margin-top:10px;">Sur le plan sonore, l'ambiance était très majoritairement silencieuse pendant la visite. Quelques passages de deux-roues ont été perçus depuis la route secondaire en contrebas (à environ 80 mètres), sans caractère gênant. Aucune activité bruyante (bar, chantier, axe routier important) n'a été identifiée à proximité.</p>
     <div style="background:var(--bg-soft);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-top:10px;"><p style="font-size:10.5px;color:var(--muted2);line-height:1.6;margin:0;"><strong style="color:var(--ink);">Limite de l'observation :</strong> la visite a eu lieu en journée. Le niveau sonore réel peut varier selon la saison, l'heure et la météo ; cette observation reflète uniquement les conditions constatées le jour de la mission.</p></div>
     <div class="rp-grid2" style="margin-top:16px;">
-      <div><div class="rp-photo"><image-slot id="rp-photo-5" shape="rect" placeholder="Photo — vue depuis la terrasse"></image-slot></div><div class="rp-cap">Vue depuis la terrasse</div></div>
-      <div><div class="rp-photo"><image-slot id="rp-photo-6" shape="rect" placeholder="Photo — vue depuis la piscine"></image-slot></div><div class="rp-cap">Vue depuis la piscine</div></div>
+      <div><div class="rp-photo"><div id="rp-photo-5" style="width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:#F6F8FA;color:#9CA3AF;font-size:13px;text-align:center;padding:20px;">Photo — vue depuis la terrasse</div></div><div class="rp-cap">Vue depuis la terrasse</div></div>
+      <div><div class="rp-photo"><div id="rp-photo-6" style="width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:#F6F8FA;color:#9CA3AF;font-size:13px;text-align:center;padding:20px;">Photo — vue depuis la piscine</div></div><div class="rp-cap">Vue depuis la piscine</div></div>
     </div>
   </div>
   <div class="rp-foot"><span>Document confidentiel — usage strictement personnel</span><span>Page 6 / 11</span></div>
@@ -235,12 +234,12 @@ body{font-family:var(--fs);color:var(--ink);}
       <tr><td>Extérieurs</td><td>Jardin entretenu, système d'irrigation goutte-à-goutte fonctionnel, oliviers matures sur la parcelle.</td></tr>
     </table>
     <div class="rp-grid2" style="margin-top:18px;">
-      <div><div class="rp-photo"><image-slot id="rp-photo-7" shape="rect" placeholder="Photo — salon / séjour"></image-slot></div><div class="rp-cap">Salon / séjour</div></div>
-      <div><div class="rp-photo"><image-slot id="rp-photo-8" shape="rect" placeholder="Photo — chambre principale"></image-slot></div><div class="rp-cap">Chambre principale</div></div>
+      <div><div class="rp-photo"><div id="rp-photo-7" style="width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:#F6F8FA;color:#9CA3AF;font-size:13px;text-align:center;padding:20px;">Photo — salon / séjour</div></div><div class="rp-cap">Salon / séjour</div></div>
+      <div><div class="rp-photo"><div id="rp-photo-8" style="width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:#F6F8FA;color:#9CA3AF;font-size:13px;text-align:center;padding:20px;">Photo — chambre principale</div></div><div class="rp-cap">Chambre principale</div></div>
     </div>
     <div class="rp-grid2" style="margin-top:12px;">
-      <div><div class="rp-photo"><image-slot id="rp-photo-9" shape="rect" placeholder="Photo — détail tache au plafond, chambre 2"></image-slot></div><div class="rp-cap">Détail : tache au plafond (chambre 2)</div></div>
-      <div><div class="rp-photo"><image-slot id="rp-photo-10" shape="rect" placeholder="Photo — jardin et système d'irrigation"></image-slot></div><div class="rp-cap">Jardin et système d'irrigation</div></div>
+      <div><div class="rp-photo"><div id="rp-photo-9" style="width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:#F6F8FA;color:#9CA3AF;font-size:13px;text-align:center;padding:20px;">Photo — détail tache au plafond, chambre 2</div></div><div class="rp-cap">Détail : tache au plafond (chambre 2)</div></div>
+      <div><div class="rp-photo"><div id="rp-photo-10" style="width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:#F6F8FA;color:#9CA3AF;font-size:13px;text-align:center;padding:20px;">Photo — jardin et système d'irrigation</div></div><div class="rp-cap">Jardin et système d'irrigation</div></div>
     </div>
   </div>
   <div class="rp-foot"><span>Document confidentiel — usage strictement personnel</span><span>Page 7 / 11</span></div>
@@ -253,12 +252,12 @@ body{font-family:var(--fs);color:var(--ink);}
     <h2 class="rp-h2">Galerie photo &amp; vidéo drone</h2>
     <p class="rp-p" style="margin-bottom:12px;">Sélection de prises de vue réalisées le jour de la mission. Les fichiers originaux en haute résolution ainsi que la vidéo complète sont transmis par un lien de téléchargement séparé.</p>
     <div class="rp-gallery">
-      <div><div class="rp-photo"><image-slot id="rp-photo-11" shape="rect" placeholder="Photo — façade principale"></image-slot></div><div class="rp-cap">Façade principale</div></div>
-      <div><div class="rp-photo"><image-slot id="rp-photo-12" shape="rect" placeholder="Photo — terrasse et piscine"></image-slot></div><div class="rp-cap">Terrasse et piscine</div></div>
-      <div><div class="rp-photo"><image-slot id="rp-photo-13" shape="rect" placeholder="Photo — cuisine"></image-slot></div><div class="rp-cap">Cuisine</div></div>
-      <div><div class="rp-photo"><image-slot id="rp-photo-14" shape="rect" placeholder="Photo — chemin d'accès"></image-slot></div><div class="rp-cap">Chemin d'accès</div></div>
-      <div><div class="rp-photo"><image-slot id="rp-photo-15" shape="rect" placeholder="Photo — terrain et oliviers"></image-slot></div><div class="rp-cap">Terrain et oliviers</div></div>
-      <div style="position:relative;"><div class="rp-video-slot"><image-slot id="rp-photo-drone" shape="rect" placeholder="Vignette vidéo drone — 45s, non montée"></image-slot><div class="rp-play"></div><span class="rp-video-cap">Vidéo drone — 45s, non montée</span></div><div class="rp-cap">Vue aérienne du terrain et de l'environnement</div></div>
+      <div><div class="rp-photo"><div id="rp-photo-11" style="width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:#F6F8FA;color:#9CA3AF;font-size:13px;text-align:center;padding:20px;">Photo — façade principale</div></div><div class="rp-cap">Façade principale</div></div>
+      <div><div class="rp-photo"><div id="rp-photo-12" style="width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:#F6F8FA;color:#9CA3AF;font-size:13px;text-align:center;padding:20px;">Photo — terrasse et piscine</div></div><div class="rp-cap">Terrasse et piscine</div></div>
+      <div><div class="rp-photo"><div id="rp-photo-13" style="width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:#F6F8FA;color:#9CA3AF;font-size:13px;text-align:center;padding:20px;">Photo — cuisine</div></div><div class="rp-cap">Cuisine</div></div>
+      <div><div class="rp-photo"><div id="rp-photo-14" style="width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:#F6F8FA;color:#9CA3AF;font-size:13px;text-align:center;padding:20px;">Photo — chemin d'accès</div></div><div class="rp-cap">Chemin d'accès</div></div>
+      <div><div class="rp-photo"><div id="rp-photo-15" style="width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:#F6F8FA;color:#9CA3AF;font-size:13px;text-align:center;padding:20px;">Photo — terrain et oliviers</div></div><div class="rp-cap">Terrain et oliviers</div></div>
+      <div style="position:relative;"><div class="rp-video-slot"><div id="rp-photo-drone" style="width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:#F6F8FA;color:#9CA3AF;font-size:13px;text-align:center;padding:20px;">Vignette vidéo drone — 45s, non montée</div><div class="rp-play"></div><span class="rp-video-cap">Vidéo drone — 45s, non montée</span></div><div class="rp-cap">Vue aérienne du terrain et de l'environnement</div></div>
     </div>
   </div>
   <div class="rp-foot"><span>Document confidentiel — usage strictement personnel</span><span>Page 8 / 11</span></div>

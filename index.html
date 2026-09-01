@@ -66,7 +66,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
-<script src="image-slot.js"></script>
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 
@@ -653,7 +652,7 @@
           </div>
     <div class="hero-visual">
       <div class="hero-photo">
-        <image-slot id="hero-photo" shape="rect" placeholder="Glissez une photo réelle (Chania, port vénitien, ouest de la Crète...)" src="uploads/01-index-hero-chania-port.jpg"></image-slot>
+        <img id="hero-photo" src="uploads/01-index-hero-chania-port.jpg" alt="Port vénitien de Chania, ouest de la Crète" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
       </div>
       <div class="hero-card2 float">
         <span aria-hidden="true">✅</span> Zone confirmée avant paiement
@@ -717,7 +716,7 @@
   <div class="wrap">
     <div class="about-grid">
       <div class="about-photo reveal" style="position:relative;overflow:hidden;border-radius:22px;">
-        <image-slot id="about-team-photo" shape="rect" placeholder="Glissez une photo du fondateur" src="assets/fondateur.png" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;"></image-slot>
+        <img id="about-team-photo" src="assets/fondateur.png" alt="Nathaniel Debache, fondateur d'ImmobilierEnCrete.fr" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;" loading="lazy">
       </div>
       <div class="reveal">
         <span class="eye eye-blue"><span class="eye-dot dot-blue" aria-hidden="true"></span>À propos</span>
@@ -817,7 +816,7 @@
         <p style="margin-top:14px;"><a href="visite-proxy.html" style="font-size:13.5px;font-weight:700;color:var(--blue-l);">En savoir plus sur la Visite Proxy</a></p>
       </div>
       <div class="offer-photo offer-photo-blue offer-photo-stretch reveal">
-        <image-slot id="offer-visite-proxy" shape="rect" placeholder="Glissez une photo de bien / terrain"></image-slot>
+        <img id="offer-visite-proxy" src="uploads/01-index-hero-chania-port.jpg" alt="Regard terrain avant achat en Crète" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
       </div>
       <div class="reveal" style="grid-column:1/-1;margin-top:20px;">
         <div class="offer-subhead">Tarifs par zone</div>
@@ -826,7 +825,7 @@
             <span class="tier-launch-badge">🚀 Jusqu'au <span data-launch-deadline>30/09</span></span>
             <div class="tier-name">Cœur</div>
             <div class="tier-zones">Chania, Akrotiri, Souda, Stavros</div>
-            <div class="tier-price"><span data-launch style="text-decoration:line-through;color:var(--muted2);font-weight:700;font-size:15px;margin-right:6px;">399€</span><span data-launch style="font-size:22px;font-weight:800;color:var(--blue);">299€</span><span class="tier-price-fallback" style="display:none;">399€</span> <span>TTC</span></div>
+            <div class="tier-price"><span data-launch style="text-decoration:line-through;color:var(--muted2);font-weight:700;font-size:15px;margin-right:6px;">399€</span><span data-launch style="font-size:22px;font-weight:800;color:var(--blue);">299€</span><span class="tier-price-fallback" style="display:none;">399€ <span>TTC</span></span></div>
           </div>
           <div class="tier-card">
             <div class="tier-name">Étendue</div>
@@ -946,7 +945,7 @@
   <div class="wrap">
     <div class="offer-grid">
       <div class="offer-photo offer-photo-green reveal">
-        <image-slot id="offer-installation" shape="rect" src="uploads/offer-installation-36ddbd23.png" placeholder="Glissez une photo installation / Crète"></image-slot>
+        <img id="offer-installation" src="uploads/offer-installation-36ddbd23.png" alt="Installation en Crète" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
       </div>
       <div class="reveal">
         <span class="offer-badge offer-badge-green">Service central</span>
@@ -1014,7 +1013,7 @@
         </div>
       </div>
       <div class="zones-map reveal">
-        <image-slot id="zones-map-illustration" shape="rect" radius="0" fit="contain" placeholder="Glissez votre illustration de carte (ouest de la Crète)" src="assets/carte-crete.png" style="width:100%;height:auto;aspect-ratio:1448/1086;display:block;"></image-slot>
+        <img id="zones-map-illustration" src="assets/carte-crete.png" alt="Carte de l'ouest de la Crète" style="width:100%;height:auto;aspect-ratio:1448/1086;display:block;object-fit:contain;border-radius:0px;" loading="lazy">
       </div>
     </div>
   </div>
