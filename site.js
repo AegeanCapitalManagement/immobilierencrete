@@ -1,76 +1,33 @@
 // Shared behaviour for ImmobilierEnCrete.fr subpages (visite-proxy, pack-installation,
 // simulateur, exemple-rapport, zones/*). The homepage keeps its own inline copy.
 
-// ---------- Offre de lancement — échéance calendaire (source unique) ----------
-// Remplace l'ancien compteur de "places restantes" (invérifiable, donc trompeur) par
-// une date de fin réelle : simple à honorer, pas de stock à suivre manuellement.
-// Changez UNIQUEMENT cette date pour prolonger ou arrêter l'offre — passé cette date,
-// tous les éléments marqués data-launch (bandeau, badges, CTA) disparaissent
-// automatiquement sur TOUTES les pages.
-var LAUNCH_OFFER_DEADLINE = new Date('2026-08-31T23:59:59+03:00');
-var LAUNCH_OFFER_ACTIVE = new Date() < LAUNCH_OFFER_DEADLINE;
-if (!LAUNCH_OFFER_ACTIVE){
-  document.querySelectorAll('[data-launch]').forEach(function(el){ el.remove(); });
-  document.querySelectorAll('.tier-price-fallback').forEach(function(el){ el.style.display = ''; });
-} else {
-  var LAUNCH_DEADLINE_LABEL = LAUNCH_OFFER_DEADLINE.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
-  document.querySelectorAll('[data-launch-deadline]').forEach(function(el){ el.textContent = LAUNCH_DEADLINE_LABEL; });
-}
-
 // ---------- Paiement direct — Stripe Payment Links ----------
 // Remplacez chaque valeur par le Payment Link Stripe correspondant (Stripe
-// Dashboard > Payment Links). Tant qu'une valeur commence par "REPLACE_", le
+// Dashboard > Payment Links). Tant qu'une valeur reste vide, le
 // bouton continue de renvoyer vers le formulaire de contact (aucune rupture
 // de parcours en attendant les liens réels). Une fois le lien renseigné, TOUS
 // les boutons portant ce data-cta-intent, sur TOUTES les pages, pointent
 // directement vers Stripe.
 var STRIPE_PAYMENT_LINKS = {
-  'Guide Acheter en Crète': 'REPLACE_STRIPE_LINK_GUIDE',
-  'Crète Insider': 'REPLACE_STRIPE_LINK_INSIDER'
+  'Guide Acheter en Crète': '',
+  'Crète Insider': ''
 };
 document.querySelectorAll('[data-cta-intent]').forEach(function(el){
   var intent = el.getAttribute('data-cta-intent');
   var link = STRIPE_PAYMENT_LINKS[intent];
-  if (link && link.indexOf('REPLACE_') !== 0){
+  if (link && /^https:\/\//.test(link)){
     el.setAttribute('href', link);
     el.setAttribute('target', '_blank');
     el.setAttribute('rel', 'noopener');
     el.setAttribute('data-stripe-wired', '1');
+  } else if (intent === 'Guide Acheter en Crète') {
+    el.setAttribute('href', 'contact.html?objet=Guide%20Acheter%20en%20Cr%C3%A8te#contact');
+    el.setAttribute('data-payment-pending', '1');
   }
 });
 
-// ---------- Header/sticky CTA alternator ----------
-// Rotates the primary CTA (header, mobile nav, sticky bar) between the two
-// flagship offers so Installation Facilitée gets equal top-of-page visibility
-// alongside Visite Proxy / Tarif de Lancement. Only runs while the launch
-// offer is active (those buttons carry data-launch and get removed above
-// once it ends — nothing left to rotate at that point).
-(function(){
-  var rotators = document.querySelectorAll('.cta-rotate');
-  if (!rotators.length) return;
-  var states = LAUNCH_OFFER_ACTIVE ? [
-    { href: '#tarif-lancement', label: '🚀 Offre de lancement — 299€', intent: 'Offre de lancement' },
-    { href: '#installation', label: 'Installation Facilitée — 349€ TTC', intent: 'Installation Facilitée' }
-  ] : [
-    { href: '#visite-proxy', label: 'Envoyer le lien du bien', intent: 'Visite Proxy' },
-    { href: '#installation', label: 'Installation Facilitée — 349€ TTC', intent: 'Installation Facilitée' }
-  ];
-  var i = 0;
-  function apply(){
-    var s = states[i];
-    rotators.forEach(function(el){
-      el.style.opacity = '0';
-      setTimeout(function(){
-        el.setAttribute('href', s.href);
-        el.setAttribute('data-cta-intent', s.intent);
-        var label = el.querySelector('.cta-label');
-        if (label){ label.textContent = s.label; }
-        el.style.opacity = '1';
-      }, 200);
-    });
-  }
-  setInterval(function(){ i = (i + 1) % states.length; apply(); }, 6000);
-})();
+// Le CTA principal reste fixe. Un libellé qui change pendant la lecture peut
+// surprendre l'utilisateur et affaiblir la priorité donnée à la Visite Proxy.
 
 // ---------- Google Analytics 4 — événements clés ----------
 // Envoie un événement gtag si GA est chargé (silencieux sinon), pour suivre
@@ -155,6 +112,13 @@ document.querySelectorAll('[data-cta-intent]').forEach(function(el){
   var objet = params.get('objet');
   if (objet && objetSelect){
     var matched = Array.prototype.some.call(objetSelect.options, function(opt){ return opt.value === objet; });
+    if (!matched && objet === 'Guide Acheter en Crète'){
+      var guideOption = document.createElement('option');
+      guideOption.value = objet;
+      guideOption.textContent = 'Guide Acheter en Crète — être prévenu';
+      objetSelect.appendChild(guideOption);
+      matched = true;
+    }
     if (matched){ objetSelect.value = objet; }
     window.addEventListener('load', function(){
       setTimeout(function(){
@@ -178,6 +142,14 @@ function sendToFormSubmit(payload){
     body: JSON.stringify(payload)
   }).then(function(r){ return r.json(); });
 }
+
+// Les formulaires disposent aussi d'un POST HTML direct vers FormSubmit.co.
+// Le JavaScript améliore l'expérience, mais l'envoi ne dépend plus entièrement
+// de lui : en cas de script bloqué, aucune donnée n'est ajoutée à l'URL.
+document.querySelectorAll('form').forEach(function(form){
+  if (!form.getAttribute('method')) form.setAttribute('method', 'post');
+  if (!form.getAttribute('action')) form.setAttribute('action', 'https://formsubmit.co/' + FORM_DESTINATION_EMAIL);
+});
 
 // contact form: sends via FormSubmit.co, falls back to a pre-filled mailto if the request fails
 var contactForm = document.getElementById('contact-form');
@@ -236,21 +208,6 @@ if (contactForm){
   });
 }
 
-// ---------- Checkbox l\u00e9gale obligatoire avant paiement (droit de r\u00e9tractation) ----------
-// Inject\u00e9e automatiquement avant CHAQUE bouton .contact-submit, sur toutes les pages :
-// une seule source de v\u00e9rit\u00e9 pour ce texte, pas besoin d'\u00e9diter chaque formulaire.
-document.querySelectorAll('.contact-submit').forEach(function(btn){
-  if (btn.dataset.retractAdded) return;
-  btn.dataset.retractAdded = '1';
-  var id = 'retract-' + Math.random().toString(36).slice(2);
-  var field = document.createElement('div');
-  field.className = 'field full retract-field';
-  field.style.cssText = 'display:flex;gap:10px;align-items:flex-start;margin:2px 0 4px;';
-  field.innerHTML = '<input type="checkbox" required id="' + id + '" style="margin-top:3px;flex-shrink:0;width:16px;height:16px;">' +
-    '<label for="' + id + '" style="font-size:12.5px;color:var(--muted);line-height:1.6;font-weight:500;">Je demande express\u00e9ment que l\u2019ex\u00e9cution de la prestation commence avant la fin du d\u00e9lai l\u00e9gal de r\u00e9tractation. Je reconnais qu\u2019en cas d\u2019ex\u00e9cution compl\u00e8te de la prestation, je perds mon droit de r\u00e9tractation conform\u00e9ment aux r\u00e8gles applicables.</label>';
-  btn.parentElement.insertBefore(field, btn);
-});
-
 // ---------- Formulaires "lead magnet" g\u00e9n\u00e9riques (exemple de rapport, newsletter...) ----------
 document.querySelectorAll('form[data-lead]').forEach(function(form){
   form.addEventListener('submit', function(e){
@@ -281,6 +238,8 @@ document.querySelectorAll('form[data-lead]').forEach(function(form){
 
 // ---------- Popup exit-intent (Guide Acheter en Cr\u00e8te 9\u20ac) ----------
 (function(){
+  // Pas de relance d'achat avant l'ouverture réelle des ventes.
+  if (!STRIPE_PAYMENT_LINKS['Guide Acheter en Crète']) return;
   if (sessionStorage.getItem('exitPopupShown')) return;
   var shown = false;
   function show(){
@@ -296,9 +255,9 @@ document.querySelectorAll('form[data-lead]').forEach(function(form){
       '<button id="exitPopupClose" aria-label="Fermer" style="position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:#fff;font-size:16px;cursor:pointer;">\u2715</button>' +
       '<div style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--green-d);margin-bottom:12px;">Avant de partir</div>' +
       '<h3 style="font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.01em;line-height:1.25;">Commencez par le Guide Acheter en Cr\u00e8te.</h3>' +
-      '<p style="font-size:14px;color:var(--muted);line-height:1.6;margin-top:10px;">Zones, prix, d\u00e9marches et pi\u00e8ges \u00e0 \u00e9viter \u2014 l\u2019essentiel pour d\u00e9marrer votre projet, pour 9\u20ac.</p>' +
+      '<p style="font-size:14px;color:var(--muted);line-height:1.6;margin-top:10px;">Zones, prix, d\u00e9marches et pi\u00e8ges \u00e0 \u00e9viter \u2014 l\u2019essentiel pour d\u00e9marrer votre projet. Le paiement sera ouvert prochainement.</p>' +
       '<div style="margin-top:22px;">' +
-      '<a href="' + guideHref + '" class="btn btn-primary" style="justify-content:center;width:100%;" data-cta-intent="Guide exit-intent">Voir le Guide \u00e0 9\u20ac \u2192</a>' +
+      '<a href="' + guideHref + '" class="btn btn-primary" style="justify-content:center;width:100%;" data-cta-intent="Guide exit-intent">Voir le guide et être prévenu \u2192</a>' +
       '</div>' +
       '<p style="text-align:center;margin-top:14px;font-size:12.5px;"><a href="' + reportPdfHref + '" target="_blank" rel="noopener" style="color:var(--blue-l);font-weight:700;" data-cta-intent="Exemple rapport exit-intent">Ou d\u00e9couvrez un exemple de rapport Visite Proxy (PDF) \u2197</a></p>' +
       '</div>';

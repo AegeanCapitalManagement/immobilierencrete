@@ -8,12 +8,12 @@
 <title>ImmobilierEnCrete.fr | Bientôt en ligne</title>
 <meta name="description" content="ImmobilierEnCrete.fr est en ligne : Visite Proxy, rapport terrain indépendant, Installation Facilitée, simulateur de budget et guides pour les francophones qui achètent ou s'installent en Crète.">
 <meta name="robots" content="noindex,follow">
-<link rel="canonical" href="https://immobilierencrete.fr/bientot.html">
+<link rel="canonical" href="https://www.immobilierencrete.fr/bientot.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ImmobilierEnCrete.fr">
 <meta property="og:title" content="ImmobilierEnCrete.fr | Bientôt en ligne">
 <meta property="og:description" content="ImmobilierEnCrete.fr est en ligne : Visite Proxy, rapport terrain indépendant, Installation Facilitée, simulateur de budget et guides pour les francophones.">
-<meta property="og:image" content="https://immobilierencrete.fr/assets/og-image-1200x630.png">
+<meta property="og:image" content="https://www.immobilierencrete.fr/assets/og-image-1200x630.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="fr_FR">
@@ -105,14 +105,14 @@
     <div class="soon-card fade-up">
       <span class="soon-badge">🚀 ImmobilierEnCrete.fr est en ligne</span>
       <h1 class="soon-h1">Acheter ou vous installer en Crète,<br><span class="accent">sans zones d'ombre.</span></h1>
-      <p class="soon-p">ImmobilierEnCrete.fr arrive très prochainement : Visite Proxy, rapport terrain indépendant, Installation Facilitée, simulateur de budget et guides pour les francophones qui achètent ou s'installent en Crète. Inscrivez-vous pour être prévenu en priorité dès le lancement et profiter du Tarif de Lancement avant tout le monde.</p>
+      <p class="soon-p">ImmobilierEnCrete.fr est maintenant en ligne : Visite Proxy, rapport terrain indépendant, Installation Facilitée, simulateur de budget et guides pour les francophones qui achètent ou s'installent en Crète. Inscrivez-vous uniquement si vous souhaitez recevoir les prochaines nouveautés.</p>
 
-      <form class="soon-form" id="soon-form">
+      <form class="soon-form" id="soon-form" method="post" action="https://formsubmit.co/contact@immobilierencrete.fr">
         <input type="text" name="_hp_website" id="_hp_website" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
         <input type="email" id="soon-email" name="email" placeholder="votre@email.com" required autocomplete="email">
-        <button type="submit">Être prévenu au lancement</button>
+        <button type="submit">Recevoir les nouveautés</button>
       </form>
-      <p class="soon-note" id="soon-note">Aucun spam — juste un e-mail au lancement, avec l'offre de lancement en priorité.</p>
+      <p class="soon-note" id="soon-note">Aucun spam — seulement les nouveautés importantes. En vous inscrivant, vous acceptez ces envois ; désinscription possible à tout moment. <a href="confidentialite.html" style="color:inherit;text-decoration:underline;">Confidentialité</a>.</p>
 
       <div class="soon-features">
         <div class="soon-feat"><span class="dot"></span>Rapport livré sous 48h après la visite</div>
@@ -160,7 +160,7 @@
           <div class="soon-service-ic">📘</div>
           <div class="soon-service-t">Guide Acheter en Crète</div>
           <div class="soon-service-d">Les étapes réelles d'un achat à distance, les pièges fréquents et les bonnes questions à poser avant de vous engager.</div>
-          <div class="soon-service-p">9€, accès immédiat</div>
+          <div class="soon-service-p">9€ à sa sortie — ouverture prochaine</div>
         </div>
       </div>
     </div>
@@ -193,13 +193,13 @@
   // ---------- Partage ----------
   var shareWa = document.getElementById('soonShareWa');
   if (shareWa){
-    var shareText = encodeURIComponent("ImmobilierEnCrete.fr arrive bientôt : Visite Proxy, rapport terrain indépendant et guides pour acheter en Crète. À suivre → https://immobilierencrete.fr/bientot.html");
+    var shareText = encodeURIComponent("ImmobilierEnCrete.fr arrive bientôt : Visite Proxy, rapport terrain indépendant et guides pour acheter en Crète. À suivre → https://www.immobilierencrete.fr/bientot.html");
     shareWa.setAttribute('href', 'https://wa.me/?text=' + shareText);
   }
   var copyBtn = document.getElementById('soonCopyLink');
   if (copyBtn){
     copyBtn.addEventListener('click', function(){
-      navigator.clipboard.writeText('https://immobilierencrete.fr/bientot.html').then(function(){
+      navigator.clipboard.writeText('https://www.immobilierencrete.fr/bientot.html').then(function(){
         var original = copyBtn.textContent;
         copyBtn.textContent = '✅ Lien copié';
         setTimeout(function(){ copyBtn.textContent = original; }, 2000);
@@ -222,22 +222,21 @@
     var note = document.getElementById('soon-note');
     var btn = soonForm.querySelector('button');
     btn.disabled = true;
-    fetch('https://api.web3forms.com/submit', {
+    fetch('https://formsubmit.co/ajax/' + encodeURIComponent('contact@immobilierencrete.fr'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
-        access_key: '2bb2c7e0-1eaf-4ca2-b9ac-4be1ff490fac',
-        subject: 'ImmobilierEnCrete.fr \u2014 nouvelle inscription liste d\u2019attente',
-        from_name: 'Liste d\u2019attente (page bient\u00f4t)',
+        _subject: 'ImmobilierEnCrete.fr \u2014 nouvelle inscription liste d\u2019attente',
+        name: 'Liste d\u2019attente (page bient\u00f4t)',
         email: email,
-        message: 'Inscription liste d\u2019attente avant lancement, e-mail : ' + email
+        message: 'Inscription aux nouveautés ImmobilierEnCrete.fr, e-mail : ' + email
       })
     }).then(function(r){ return r.json(); }).then(function(res){
       btn.disabled = false;
-      note.textContent = res && res.success ? 'Merci ! Un e-mail de confirmation vient de partir — vous serez prévenu(e) en priorité.' : 'Bien reçu — vous serez prévenu(e) dès le lancement.';
+      note.textContent = res && res.success ? 'Merci ! Votre inscription est bien enregistrée.' : 'L\u2019inscription n\u2019a pas pu être confirmée. Réessayez ou contactez-nous.';
       note.classList.add('soon-confirm');
       soonForm.reset();
-      trackEvent('waitlist_signup', { page: 'bientot' });
+      if (typeof trackEvent === 'function'){ trackEvent('waitlist_signup', { page: 'bientot' }); }
     }).catch(function(){
       btn.disabled = false;
       note.textContent = 'Une erreur est survenue — réessayez, ou écrivez-nous sur WhatsApp.';

@@ -88,6 +88,7 @@ img{display:block;max-width:100%;}
 .wa-btn svg{width:22px;height:22px;}
 .wa-hidden{display:none !important;}
 .btn:focus-visible,.zone-chip:focus-visible,.menu-btn:focus-visible{outline:2px solid var(--blue-l);outline-offset:2px;}
+.mobile-nav a:focus-visible,.faq-item summary:focus-visible,.f-links a:focus-visible,.contact-form input:focus-visible,.contact-form select:focus-visible,.contact-form textarea:focus-visible{outline:2px solid var(--blue-l);outline-offset:3px;}
 .menu-btn{display:none;width:40px;height:40px;border-radius:10px;border:1.5px solid var(--border);background:#fff;align-items:center;justify-content:center;flex-shrink:0;}
 .menu-btn svg{width:18px;height:18px;}
 .mobile-nav{display:none;position:fixed;top:76px;inset-inline:0;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 16px 30px -18px rgba(15,27,36,.18);z-index:199;padding:10px 22px 22px;flex-direction:column;gap:2px;}
@@ -108,8 +109,7 @@ img{display:block;max-width:100%;}
 .wa-fab:hover{transform:translateY(-2px);box-shadow:0 18px 38px -10px rgba(37,211,102,.65);}
 .wa-fab svg{width:22px;height:22px;flex-shrink:0;}
 @media (max-width:900px){
-  .wa-fab{right:16px;bottom:88px;padding:13px 13px;}
-  .wa-fab-label{display:none;}
+  .wa-fab{display:none;}
 }
 
 section[id]{scroll-margin-top:92px;}
@@ -333,24 +333,6 @@ section[id]{scroll-margin-top:92px;}
 .f-links a{font-size:12.5px;color:rgba(255,255,255,.34);font-weight:600;transition:color .15s;}
 .f-links a:hover{color:rgba(255,255,255,.7);}
 
-/* ---------- launch banner ---------- */
-.launch-banner{background:linear-gradient(135deg,var(--navy),var(--navy2));padding-block:52px;position:relative;overflow:hidden;}
-.launch-banner .launch-inner{position:relative;z-index:1;}
-.launch-inner{display:grid;grid-template-columns:1.3fr .9fr;gap:48px;align-items:center;}
-.launch-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(30,158,109,.18);border:1px solid rgba(125,220,176,.35);color:#7DDCB0;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:8px 16px;border-radius:100px;margin-bottom:18px;}
-.launch-h{font-size:clamp(28px,3.4vw,40px);font-weight:800;color:#fff;letter-spacing:-.02em;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;}
-.launch-old{font-size:18px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:line-through;}
-.launch-p{font-size:15px;color:rgba(255,255,255,.68);line-height:1.7;margin-top:16px;max-width:560px;}
-.launch-list{margin-top:18px;display:flex;flex-direction:column;gap:10px;}
-.launch-list li{font-size:14px;color:rgba(255,255,255,.85);font-weight:600;list-style:none;}
-.launch-right{display:flex;flex-direction:column;align-items:flex-start;gap:14px;}
-.launch-note{font-size:12.5px;color:rgba(255,255,255,.5);line-height:1.6;max-width:280px;}
-@media (max-width:900px){
-  .launch-inner{grid-template-columns:1fr;gap:24px;}
-  .launch-right{align-items:stretch;}
-  .launch-right .btn{width:100%;justify-content:center;}
-}
-
 /* ---------- image placeholders (image-slot empty state) ---------- */
 image-slot{--ph-a:rgba(13,36,56,.05);--ph-tint:var(--bg-soft2);}
 image-slot::part(frame){
@@ -379,15 +361,16 @@ image-slot::part(empty){color:var(--navy2);gap:10px;}
 @media (max-width:1100px){
   .offer-grid{gap:44px;}
 }
-@media (max-width:1460px){
+@media (max-width:1120px){
   .h-nav{display:none;}
   .menu-btn{display:flex;}
-  .sticky-cta{display:block;}
 }
 @media (max-width:900px){
+  body{padding-bottom:72px;}
+  .sticky-cta{display:block;}
   .wrap{padding-inline:22px;}
-  .hero-grid{grid-template-columns:1fr;gap:52px;padding-block:44px 40px;}
-  .hero-visual{order:-1;}
+  .hero-grid{grid-template-columns:1fr;gap:38px;padding-block:44px 40px;}
+  .hero-visual{order:initial;}
   .hero-h1{font-size:clamp(32px,9vw,44px);}
   .hero-p{font-size:16px;}
   .hero-card{left:0;bottom:-20px;max-width:240px;padding:14px 16px;}
@@ -412,12 +395,20 @@ image-slot::part(empty){color:var(--navy2);gap:10px;}
   .price-box{flex-direction:column;align-items:stretch;text-align:left;}
   .price-box .btn{width:100%;justify-content:center;margin-top:6px;}
   .footer .wrap{flex-direction:column;text-align:center;}
+  .zone-chip{min-height:44px;display:inline-flex;align-items:center;justify-content:center;}
 }
 @media (max-width:480px){
   .wrap{padding-inline:18px;}
   .hero-tag{padding:7px 13px;}
   .hero-tag-txt{font-size:11px;}
   .h-cta .btn span.long{display:none;}
+  .header{height:68px;}
+  .header .wrap{padding-inline:16px;}
+  .h-logo{height:27px;max-width:150px;}
+  .mobile-nav{top:68px;}
+  .hero{padding-top:68px;}
+  .sticky-cta{padding:9px 10px;}
+  .sticky-cta .btn{min-height:48px;padding:13px 14px;font-size:13.5px;white-space:normal;text-align:center;}
 }
 
 /* ---------- zone pages: quartiers / infos pratiques / marché ---------- */

@@ -43,7 +43,7 @@
     },
     zoneCoeur: {
       title: 'Zone Cœur — 399€ TTC',
-      text: 'Offre de lancement en cours : 299€ TTC jusqu\'au 30 septembre 2026 (formule Essentiel). Vous envoyez l\u2019annonce, un rapport terrain (accès, environnement, points de vigilance) vous est livré sous 48h.',
+      text: 'Vous envoyez l\u2019annonce, un rapport terrain (accès, environnement, points de vigilance) vous est livré sous 48h.',
       back: 'start',
       options: endOptions('Visite Proxy', 'Bonjour, j\u2019ai un bien à Chania/Akrotiri/Souda/Stavros à faire vérifier (Visite Proxy).')
     },
@@ -67,11 +67,11 @@
     },
     budget: {
       title: 'Estimer votre budget réel',
-      text: 'Le simulateur gratuit calcule frais d\u2019acquisition et marge de sécurité en quelques secondes. Le Guide "Acheter en Crète" (9€) détaille aussi les étapes et pièges à éviter.',
+      text: 'Le simulateur gratuit donne une estimation indicative des frais d\u2019acquisition et de la marge de sécurité. Le Guide "Acheter en Crète" sera proposé à 9 € lors de sa sortie.',
       back: 'start',
       options: [
-        { label: 'Ouvrir le simulateur', action: 'link', href: 'simulateur.html', style: 'primary' },
-        { label: 'Voir le Guide (9€)', action: 'link', href: 'index.html#guide', style: 'ghost' }
+        { label: 'Ouvrir le simulateur', action: 'link', href: 'simulateur.html#calculateur', style: 'primary' },
+        { label: 'Être prévenu pour le Guide', action: 'link', href: 'index.html#guide', style: 'ghost' }
       ]
     },
     installation: {
@@ -92,7 +92,7 @@
     },
     faqPrix: {
       title: 'Tarifs Visite Proxy',
-      text: '399€ TTC en zone Cœur (299€ pendant l\'offre de lancement, jusqu\'au 30/09/2026), 449€ TTC en zone Étendue, 499€ TTC à Réthymnon, option drone +49€ TTC. Au-delà : sur devis.',
+      text: '399€ TTC en zone Cœur, 449€ TTC en zone Étendue, 499€ TTC à Réthymnon, option drone +49€ TTC. Au-delà : sur devis.',
       back: 'faq',
       options: [{ label: 'Voir le détail complet', action: 'link', href: 'visite-proxy.html', style: 'primary' }]
     },
@@ -117,6 +117,10 @@
   };
 
   var STYLE = '\n    #cb-root *{box-sizing:border-box;font-family:var(--fs,\'Plus Jakarta Sans\',-apple-system,BlinkMacSystemFont,sans-serif);}\n    #cb-fab{position:fixed;right:22px;bottom:86px;z-index:195;width:56px;height:56px;border-radius:50%;background:var(--blue,#1B547E);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px -10px rgba(27,84,126,.55);border:none;cursor:pointer;transition:transform .18s ease;}\n    #cb-fab:hover{transform:translateY(-2px);}\n    #cb-fab svg{width:26px;height:26px;}\n    #cb-fab .cb-dot{position:absolute;top:-2px;right:-2px;width:14px;height:14px;border-radius:50%;background:var(--green,#1E9E6D);border:2px solid #fff;}\n    @media (max-width:900px){ #cb-fab{right:16px;bottom:160px;width:46px;height:46px;} #cb-fab svg{width:20px;height:20px;} }\n    @media (max-width:700px){ #cb-fab{display:none;} }\n    #cb-panel{position:fixed;right:22px;bottom:154px;z-index:195;width:340px;max-width:calc(100vw - 32px);max-height:min(560px,calc(100vh - 190px));background:#fff;border-radius:20px;box-shadow:0 30px 70px -20px rgba(15,27,36,.35);border:1px solid var(--border,#E4E9ED);display:none;flex-direction:column;overflow:hidden;}\n    #cb-panel.open{display:flex;}\n    @media (max-width:900px){ #cb-panel{right:16px;left:16px;width:auto;bottom:214px;max-height:min(60vh,460px);} }\n    #cb-head{background:var(--blue,#1B547E);color:#fff;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}\n    #cb-head-t{font-size:14.5px;font-weight:800;}\n    #cb-head-s{font-size:11.5px;color:rgba(255,255,255,.8);margin-top:2px;}\n    #cb-close{background:rgba(255,255,255,.16);border:none;width:28px;height:28px;border-radius:50%;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}\n    #cb-body{padding:18px;overflow-y:auto;flex:1;}\n    #cb-title{font-size:15.5px;font-weight:800;color:var(--ink,#0F1B24);margin-bottom:6px;line-height:1.35;}\n    #cb-text{font-size:13px;color:var(--muted,#5B6672);line-height:1.6;margin-bottom:14px;}\n    #cb-opts{display:flex;flex-direction:column;gap:8px;}\n    .cb-opt{text-align:left;border-radius:12px;border:1.5px solid var(--border,#E4E9ED);background:#fff;color:var(--ink,#0F1B24);font-size:13px;font-weight:700;padding:11px 14px;cursor:pointer;transition:border-color .15s,background .15s;text-decoration:none;display:block;}\n    .cb-opt:hover{border-color:var(--blue,#1B547E);background:var(--bg-soft,#F6F8FA);}\n    .cb-opt.primary{background:var(--blue,#1B547E);border-color:var(--blue,#1B547E);color:#fff;}\n    .cb-opt.primary:hover{background:var(--blue-l,#2E86C1);border-color:var(--blue-l,#2E86C1);}\n    .cb-opt.wa{background:#25D366;border-color:#25D366;color:#fff;}\n    .cb-opt.wa:hover{background:#20BD5A;border-color:#20BD5A;}\n    #cb-back{background:none;border:none;color:var(--muted2,#7A8390);font-size:12px;font-weight:700;cursor:pointer;padding:0 0 12px;display:flex;align-items:center;gap:4px;}\n  ';
+
+  // Sur mobile/tablette, le CTA fixe suffit et évite trois éléments flottants
+  // superposés (barre d'action, WhatsApp et chatbot).
+  STYLE += '\n@media (max-width:900px){#cb-fab,#cb-panel{display:none!important;}}';
 
   function el(tag, attrs, children) {
     var e = document.createElement(tag);

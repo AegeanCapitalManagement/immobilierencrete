@@ -6,13 +6,13 @@
 <title>ImmobilierEnCrete.fr — Vérifiez un bien en Crète avant de vous déplacer</title>
 <meta name="description" content="Visite Proxy et rapport terrain indépendant pour acheter en Crète — intervention directe à Chania et dans l'ouest de l'île, demandes étudiées au cas par cas ailleurs en Crète. Simulateur de budget gratuit. Service francophone, réponse sous 48h.">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://immobilierencrete.fr/">
+<link rel="canonical" href="https://www.immobilierencrete.fr/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ImmobilierEnCrete.fr">
 <meta property="og:title" content="ImmobilierEnCrete.fr — Regard terrain avant d'acheter en Crète">
 <meta property="og:description" content="Visite Proxy, rapport terrain indépendant et simulateur de budget pour acheter ou vous installer en Crète — zone directe Chania et ouest de l'île, demandes étudiées partout ailleurs sur l'île.">
-<meta property="og:url" content="https://immobilierencrete.fr/">
-<meta property="og:image" content="https://immobilierencrete.fr/assets/og-image-1200x630.png">
+<meta property="og:url" content="https://www.immobilierencrete.fr/">
+<meta property="og:image" content="https://www.immobilierencrete.fr/assets/og-image-1200x630.png">
 <meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -24,8 +24,8 @@
   "name": "ImmobilierEnCrete.fr",
   "description": "Reporting terrain indépendant, aide à la décision et coordination acheteur pour les francophones achetant ou s'installant en Crète, avec intervention directe à Chania et dans l'ouest de l'île.",
   "areaServed": ["Chania", "Akrotiri", "Apokoronas", "Platanias", "Souda", "Stavros", "Kalyves", "Almyrida", "Kissamos"],
-  "url": "https://immobilierencrete.fr/",
-  "image": "https://immobilierencrete.fr/assets/equipe.webp",
+  "url": "https://www.immobilierencrete.fr/",
+  "image": "https://www.immobilierencrete.fr/assets/equipe.webp",
   "telephone": "+30 695 571 7183",
   "priceRange": "€€",
   "address": {"@type": "PostalAddress", "addressLocality": "Chania", "addressRegion": "Crète", "addressCountry": "GR"},
@@ -40,7 +40,7 @@
       {"@type": "Offer", "name": "Visite Proxy — Essentiel Réthymnon", "priceCurrency": "EUR", "price": "499"},
       {"@type": "Offer", "name": "Option drone", "priceCurrency": "EUR", "price": "49"},
       {"@type": "Offer", "name": "Installation Facilitée", "priceCurrency": "EUR", "price": "349"},
-      {"@type": "Offer", "name": "Guide Acheter en Crète", "priceCurrency": "EUR", "price": "9"}
+      {"@type": "Offer", "name": "Guide Acheter en Crète", "priceCurrency": "EUR", "price": "9", "availability": "https://schema.org/PreOrder"}
     ]
   }
 }
@@ -459,16 +459,17 @@
   @media (max-width:1100px){
     .offer-grid{gap:44px;}
   }
-  @media (max-width:1460px){
+  @media (max-width:1120px){
     .h-nav{display:none;}
     .menu-btn{display:flex;}
-    .sticky-cta{display:block;}
     .h-cta .wa-btn{display:none;}
   }
   @media (max-width:900px){
+    body{padding-bottom:72px;}
+    .sticky-cta{display:block;}
     .wrap{padding-inline:22px;}
-    .hero-grid{grid-template-columns:1fr;gap:52px;padding-block:44px 40px;}
-    .hero-visual{order:-1;}
+    .hero-grid{grid-template-columns:1fr;gap:38px;padding-block:44px 40px;}
+    .hero-visual{order:initial;}
     .hero-h1{font-size:clamp(32px,9vw,44px);}
     .hero-p{font-size:16px;}
     .hero-card{left:0;bottom:-20px;max-width:240px;padding:14px 16px;}
@@ -491,21 +492,27 @@
     .price-box{flex-direction:column;align-items:stretch;text-align:left;}
     .price-box .btn{width:100%;justify-content:center;margin-top:6px;}
     .footer .wrap{flex-direction:column;text-align:center;}
+    .zone-chip{min-height:44px;display:inline-flex;align-items:center;justify-content:center;}
   }
   @media (max-width:480px){
     .wrap{padding-inline:18px;}
     .hero-tag{padding:7px 13px;}
     .hero-tag-txt{font-size:11px;}
     .h-cta .btn span.long{display:none;}
+    .header{height:68px;}
+    .header .wrap{padding-inline:16px;}
+    .h-logo{height:27px;max-width:150px;}
+    .mobile-nav{top:68px;}
+    .hero{padding-top:68px;}
+    .sticky-cta{padding:9px 10px;}
+    .sticky-cta .btn{min-height:48px;padding:13px 14px;font-size:13.5px;white-space:normal;text-align:center;}
   }
 
   /* ---------- pricing tiers ---------- */
   .tier-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:36px;align-items:stretch;}
   @media (max-width:560px){.tier-grid{grid-template-columns:1fr;}}
   .tier-card{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:22px 20px;transition:transform .2s ease,box-shadow .2s ease;position:relative;display:flex;flex-direction:column;height:100%;}
-  .tier-card.tier-launch{border-color:#7DDCB0;box-shadow:0 12px 28px -18px rgba(30,158,109,.35);}
   .tier-card.tier-quote{background:var(--bg-soft);border-style:dashed;}
-  .tier-launch-badge{position:absolute;top:-14px;left:16px;right:16px;background:var(--green);color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.03em;padding:5px 12px;border-radius:100px;white-space:nowrap;width:max-content;max-width:calc(100% - 24px);overflow:hidden;text-overflow:ellipsis;z-index:2;box-shadow:0 4px 10px -4px rgba(30,158,109,.5);}
   .tier-card:hover{transform:translateY(-3px);box-shadow:0 16px 34px -16px rgba(15,27,36,.14);}
   .tier-name{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--blue-l);margin-bottom:8px;}
   .tier-zones{font-size:12.5px;color:var(--muted2);line-height:1.5;margin-bottom:14px;flex:1;}
@@ -521,23 +528,6 @@
   .drone-t{font-size:15.5px;font-weight:800;color:var(--ink);}
   .drone-d{font-size:13.5px;color:var(--muted);margin-top:4px;line-height:1.6;}
 
-  /* ---------- launch banner ---------- */
-.launch-banner{background:linear-gradient(135deg,var(--navy),var(--navy2));padding-block:52px;position:relative;overflow:hidden;}
-.launch-banner .launch-inner{position:relative;z-index:1;}
-.launch-inner{display:grid;grid-template-columns:1.3fr .9fr;gap:48px;align-items:center;}
-.launch-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(30,158,109,.18);border:1px solid rgba(125,220,176,.35);color:#7DDCB0;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:8px 16px;border-radius:100px;margin-bottom:18px;}
-.launch-h{font-size:clamp(28px,3.4vw,40px);font-weight:800;color:#fff;letter-spacing:-.02em;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;}
-.launch-old{font-size:18px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:line-through;}
-.launch-p{font-size:15px;color:rgba(255,255,255,.68);line-height:1.7;margin-top:16px;max-width:560px;}
-.launch-list{margin-top:18px;display:flex;flex-direction:column;gap:10px;}
-.launch-list li{font-size:14px;color:rgba(255,255,255,.85);font-weight:600;list-style:none;}
-.launch-right{display:flex;flex-direction:column;align-items:flex-start;gap:14px;}
-.launch-note{font-size:12.5px;color:rgba(255,255,255,.5);line-height:1.6;max-width:280px;}
-@media (max-width:900px){
-  .launch-inner{grid-template-columns:1fr;gap:24px;}
-  .launch-right{align-items:stretch;}
-  .launch-right .btn{width:100%;justify-content:center;}
-}
   .parr-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:44px;}
   @media (max-width:900px){.parr-grid{grid-template-columns:1fr;}}
   .parr-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:30px 28px;}
@@ -652,7 +642,7 @@
           </div>
     <div class="hero-visual">
       <div class="hero-photo">
-        <img id="hero-photo" src="uploads/village-terrain-vp-hero.jpg" alt="Village et terrain dans l'ouest de la Crète" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+        <img id="hero-photo" src="uploads/01-index-hero-chania-port.webp" alt="Port vénitien de Chania, ouest de la Crète" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
       </div>
       <div class="hero-card2 float">
         <span aria-hidden="true">✅</span> Zone confirmée avant paiement
@@ -716,7 +706,7 @@
   <div class="wrap">
     <div class="about-grid">
       <div class="about-photo reveal" style="position:relative;overflow:hidden;border-radius:22px;">
-        <img id="about-team-photo" src="assets/fondateur.png" alt="Nathaniel Debache, fondateur d'ImmobilierEnCrete.fr" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;" loading="lazy">
+        <img id="about-team-photo" src="assets/nathaniel-debache.webp" alt="Nathaniel Debache, fondateur d'ImmobilierEnCrete.fr" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;" loading="lazy" width="1024" height="1536">
       </div>
       <div class="reveal">
         <span class="eye eye-blue"><span class="eye-dot dot-blue" aria-hidden="true"></span>À propos</span>
@@ -733,64 +723,6 @@
         </div>
         <p style="margin-top:22px;"><a href="about.html" style="font-size:13.5px;font-weight:700;color:var(--blue-l);">En savoir plus sur ImmobilierEnCrete.fr →</a></p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PROBLÈME ============ -->
-<section class="section seam-top">
-  <div class="wrap">
-    <div class="prob-grid">
-      <div class="reveal">
-        <span class="eye eye-blue"><span class="eye-dot dot-blue" aria-hidden="true"></span>Ce que les annonces ne montrent pas</span>
-        <h2 class="s-h2">Tout paraît parfait<br>à 3 000 km.</h2>
-        <p class="s-p">Une annonce ne montre jamais l'état réel de la route, le voisinage ou le bruit du jour. Avant de réserver un vol, autant savoir ce que les photos ne disent pas.</p>
-      </div>
-      <div class="prob-cards">
-        <div class="prob-card reveal">
-          <div class="prob-ic ic-blue" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-5.2-7-11a7 7 0 0114 0c0 5.8-7 11-7 11z" stroke="#1B547E" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" stroke="#1B547E" stroke-width="1.8"/></svg></div>
-          <div>
-            <div class="prob-t">L'accès réel &amp; le stationnement</div>
-            <div class="prob-d">Qualité de la route, pente, possibilité de stationner — des éléments que la carte ne montre jamais.</div>
-          </div>
-        </div>
-        <div class="prob-card reveal">
-          <div class="prob-ic ic-green" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 15V9a1 1 0 011-1h3l5-4v16l-5-4H5a1 1 0 01-1-1z" stroke="#157A55" stroke-width="1.8" stroke-linejoin="round"/><path d="M17 9a4 4 0 010 6" stroke="#157A55" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-          <div>
-            <div class="prob-t">Le bruit, le voisinage, la vue réelle</div>
-            <div class="prob-d">Constructions voisines, proximité d'une route passante, nuisances observées le jour de la visite.</div>
-          </div>
-        </div>
-        <div class="prob-card reveal">
-          <div class="prob-ic ic-blue" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 9v4m0 4h.01M10.3 3.9L2.9 17a2 2 0 001.7 3h14.8a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z" stroke="#1B547E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div>
-            <div class="prob-t">Les points de vigilance à transmettre</div>
-            <div class="prob-d">Observations visuelles et questions à faire suivre à votre avocat, notaire ou ingénieur avant de décider.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ TARIF DE LANCEMENT ============ -->
-<section class="launch-banner" id="tarif-lancement" data-launch>
-  <div class="navy-blob nb1"></div>
-  <div class="navy-blob nb2"></div>
-  <div class="wrap launch-inner">
-    <div>
-      <span class="launch-badge">🚀 Offre de lancement</span>
-      <h2 class="launch-h">299€ TTC <span class="launch-old">au lieu de 399€</span></h2>
-      <p class="launch-p">Nous lançons ImmobilierEnCrete.fr : la formule Essentiel Cœur (Chania, Akrotiri, Souda, Stavros) bénéficie de ce tarif <strong style="color:#7DDCB0;">jusqu'au <span data-launch-deadline>30 septembre 2026</span></strong>. La mission est strictement identique au tarif standard : rien n'est réduit sur le contenu. Passé cette date, le tarif repasse définitivement à 399€ TTC.</p>
-      <ul class="launch-list">
-        <li>✅ Rapport terrain complet et structuré, identique au tarif standard</li>
-        <li>✅ Option drone disponible en supplément (+49€ TTC)</li>
-        <li>✅ Périmètre de la mission confirmé avant paiement</li>
-      </ul>
-    </div>
-    <div class="launch-right">
-      <a class="btn btn-green" href="#contact" data-cta-intent="Offre de lancement" style="padding:18px 34px;font-size:16px;">Réserver mon tarif de lancement <span class="arrow">→</span></a>
-      <p class="launch-note">Essentiel Cœur, jusqu'au <span data-launch-deadline>30 septembre 2026</span> — sans engagement, non cumulable avec le parrainage.</p>
     </div>
   </div>
 </section>
@@ -816,18 +748,15 @@
         <p style="margin-top:14px;"><a href="visite-proxy.html" style="font-size:13.5px;font-weight:700;color:var(--blue-l);">En savoir plus sur la Visite Proxy</a></p>
       </div>
       <div class="offer-photo offer-photo-blue offer-photo-stretch reveal">
-        <img id="offer-visite-proxy" src="uploads/01-index-hero-chania-port.jpg" alt="Regard terrain avant achat en Crète" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+        <img id="offer-visite-proxy" src="uploads/01-index-hero-chania-port.webp" alt="Regard terrain avant achat en Crète" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
       </div>
       <div class="reveal" style="grid-column:1/-1;margin-top:20px;">
         <div class="offer-subhead">Tarifs par zone</div>
         <div class="tier-grid tier-grid-4">
           <div class="tier-card">
-            <span class="tier-launch-badge" data-launch>🚀 Jusqu'au <span data-launch-deadline>30/09</span></span>
             <div class="tier-name">Cœur</div>
             <div class="tier-zones">Chania, Akrotiri, Souda, Stavros</div>
-            <div class="tier-price" data-launch style="text-decoration:line-through;color:var(--muted2);font-weight:700;font-size:15px;">399€</div>
-            <div class="tier-price" data-launch style="color:var(--blue);">299€ <span>TTC</span></div>
-            <div class="tier-price tier-price-fallback" style="display:none;">399€ <span>TTC</span></div>
+            <div class="tier-price">399€ <span>TTC</span></div>
           </div>
           <div class="tier-card">
             <div class="tier-name">Étendue</div>
@@ -921,7 +850,7 @@
   <div class="navy-blob nb2"></div>
   <div class="wrap" style="position:relative;z-index:1;">
     <span class="eye eye-blue" style="color:#8FC4E8;"><span class="eye-dot" style="background:#8FC4E8;"></span>Comment ça se passe</span>
-    <h2 class="s-h2 s-h2-light" style="max-width:560px;">Trois étapes,<br>aucun engagement.</h2>
+    <h2 class="s-h2 s-h2-light" style="max-width:560px;">Trois étapes,<br>avant de décider.</h2>
     <div class="meth-steps">
       <div class="step-card reveal">
         <div class="step-n" aria-hidden="true">01</div>
@@ -947,7 +876,7 @@
   <div class="wrap">
     <div class="offer-grid">
       <div class="offer-photo offer-photo-green reveal">
-        <img id="offer-installation" src="uploads/offer-installation-36ddbd23.png" alt="Installation en Crète" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+        <img id="offer-installation" src="uploads/offer-installation-36ddbd23.webp" alt="Installation en Crète" style="width:100%;height:100%;object-fit:cover;" loading="lazy" width="1672" height="941">
       </div>
       <div class="reveal">
         <span class="offer-badge offer-badge-green">Service central</span>
@@ -996,8 +925,8 @@
     <div class="zones-grid">
       <div class="reveal">
         <span class="eye eye-green"><span class="eye-dot dot-green" aria-hidden="true"></span>Zone d'intervention</span>
-        <h2 class="s-h2">Actifs sur toute la Crète.</h2>
-        <p class="s-p">L'ouest est notre terrain quotidien : Chania, Akrotiri, Apokoronas et Réthymnon, aux tarifs fixes indiqués plus haut.</p>
+        <h2 class="s-h2">Chania, l'ouest et Réthymnon.</h2>
+        <p class="s-p">Nous intervenons principalement autour de Chania et dans l'ouest de la Crète. Réthymnon bénéficie également d'un tarif fixe.</p>
         <p class="s-p">Un bien ailleurs en Crète — Héraklion, le sud de l'île, Hersonissos, Sitia, Lassithi ? Envoyez-nous l'annonce : nous étudions la faisabilité au cas par cas et revenons vers vous avec un devis chiffré selon la distance et nos disponibilités.</p>
         <p style="margin-top:22px;"><a class="btn btn-primary" href="#contact">Envoyer le lien du bien <span class="arrow">→</span></a></p>
         <div class="zones-chips" style="margin-top:28px;">
@@ -1015,7 +944,7 @@
         </div>
       </div>
       <div class="zones-map reveal">
-        <img id="zones-map-illustration" src="assets/carte-crete.png" alt="Carte de l'ouest de la Crète" style="width:100%;height:auto;aspect-ratio:1448/1086;display:block;object-fit:contain;border-radius:0px;" loading="lazy">
+        <img id="zones-map-illustration" src="assets/carte-crete.webp" alt="Carte de l'ouest de la Crète" style="width:100%;height:auto;aspect-ratio:1448/1086;display:block;object-fit:contain;border-radius:0px;" loading="lazy" width="1448" height="1086">
       </div>
     </div>
   </div>
@@ -1061,11 +990,11 @@
           <div class="guide-bullet"><span class="guide-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6" stroke="#157A55" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Les étapes réelles d'un achat à distance, dans l'ordre</div>
           <div class="guide-bullet"><span class="guide-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6" stroke="#157A55" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Les pièges les plus fréquents chez les acheteurs francophones</div>
           <div class="guide-bullet"><span class="guide-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6" stroke="#157A55" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Les bonnes questions à poser avant de s'engager</div>
-          <div class="guide-bullet"><span class="guide-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6" stroke="#157A55" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Accès immédiat, à lire avant votre prochain vol</div>
+          <div class="guide-bullet"><span class="guide-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6" stroke="#157A55" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Accès numérique dès l'ouverture des ventes</div>
         </div>
         <div class="guide-buyrow">
-          <div class="guide-price">9€ <span>paiement unique</span></div>
-          <a class="btn btn-green" href="#contact" data-cta-intent="Guide Acheter en Crète">Télécharger le guide <span class="arrow">→</span></a>
+          <div class="guide-price">9€ <span>à sa sortie</span></div>
+          <a class="btn btn-green" href="contact.html?objet=Guide%20Acheter%20en%20Cr%C3%A8te#contact" data-cta-intent="Guide Acheter en Crète">Être prévenu de sa sortie <span class="arrow">→</span></a>
         </div>
         <p class="guide-trust">Écrit par le fondateur d'ImmobilierEnCrete.fr.</p>
       </div>
@@ -1139,7 +1068,7 @@
         <h2 class="s-h2">Parlez-nous<br>de votre projet.</h2>
         <p class="s-p">Annonce à vérifier, installation à préparer, budget à estimer ou projet plus complexe : décrivez votre situation, nous revenons vers vous en français.</p>
       </div>
-      <form class="contact-form" id="contact-form">
+      <form class="contact-form" id="contact-form" method="post" action="https://formsubmit.co/contact@immobilierencrete.fr">
         <input type="text" name="_hp_website" id="_hp_website" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
         <div class="field"><label for="c-nom">Nom</label><input id="c-nom" name="nom" type="text" required autocomplete="name"></div>
         <div class="field"><label for="c-email">E-mail</label><input id="c-email" name="email" type="email" required autocomplete="email"></div>
@@ -1159,6 +1088,7 @@
           <button class="btn btn-primary contact-submit" type="submit">Envoyer le lien du bien <span class="arrow">→</span></button>
           <p class="contact-confirm" id="contact-confirm" hidden>Votre demande a bien été envoyée. Nous vous répondons sous 48h.</p>
           <p class="contact-note">Réponse en français, sous 48h ouvrées. Le périmètre de toute mission est confirmé avant paiement.</p>
+          <p class="contact-note">En envoyant ce formulaire, vous acceptez le traitement de vos données pour répondre à votre demande. <a href="confidentialite.html">Politique de confidentialité</a>.</p>
         </div>
       </form>
     </div>
