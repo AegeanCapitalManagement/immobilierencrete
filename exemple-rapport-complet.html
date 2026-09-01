@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exemple complet — Rapport Visite Proxy | ImmobilierEnCrete.fr</title>
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://immobilierencrete.fr/exemple-rapport-complet.html">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+<script src="image-slot.js"></script>
+<style>doc-page:not(:defined){visibility:hidden}</style>
+<style>
+:root{--navy:#0D2438;--navy2:#12314A;--blue:#1B547E;--blue-l:#2E86C1;--blue-pale:#EAF2F8;--green:#1E9E6D;--green-d:#157A55;--green-pale:#E8F6EF;--amber:#B8860B;--amber-pale:#FBF2DE;--red:#B3261E;--red-pale:#FBEAE9;--ink:#0F1B24;--muted:#5B6672;--muted2:#66707D;--border:#E4E9ED;--bg-soft:#F6F8FA;--fs:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;}
+*,*::before,*::after{box-sizing:border-box;}
+body{font-family:var(--fs);color:var(--ink);}
+.page{padding:16mm 17mm 14mm;display:flex;flex-direction:column;font-size:11.5px;position:relative;}
+.rp-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:10px;border-bottom:1.5px solid var(--border);margin-bottom:16px;}
+.rp-head-l{display:flex;align-items:center;gap:9px;}
+.rp-head-mark{width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,var(--blue),var(--green) 130%);flex-shrink:0;}
+.rp-head-name{font-size:12px;font-weight:800;color:var(--ink);letter-spacing:-.01em;}
+.rp-head-sub{font-size:9px;font-weight:600;color:var(--muted2);letter-spacing:.04em;}
+.rp-tag{font-size:9px;font-weight:800;letter-spacing:.03em;color:var(--amber);background:var(--amber-pale);border:1px solid #EAD9AE;padding:4px 10px;border-radius:100px;white-space:nowrap;}
+.rp-foot{display:flex;align-items:center;justify-content:space-between;padding-top:9px;border-top:1px solid var(--border);margin-top:auto;font-size:8.5px;color:var(--muted2);font-weight:600;}
+.rp-body{flex:1;min-height:0;}
+.rp-eyebrow{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--blue-l);margin-bottom:6px;}
+.rp-h1{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--ink);line-height:1.15;}
+.rp-h2{font-size:15px;font-weight:800;letter-spacing:-.01em;color:var(--ink);margin-bottom:10px;}
+.rp-p{font-size:11.5px;color:var(--muted);line-height:1.65;}
+.rp-p strong{color:var(--ink);}
+.rp-grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+.rp-photo{aspect-ratio:4/3;border-radius:10px;overflow:hidden;border:1px solid var(--border);}
+.rp-photo image-slot{width:100%;height:100%;display:block;}
+.rp-cap{font-size:9.5px;color:var(--muted2);font-weight:700;margin-top:5px;text-align:center;}
+.rp-table{width:100%;border-collapse:collapse;font-size:11px;}
+.rp-table td{padding:7px 4px;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top;}
+.rp-table td:first-child{font-weight:700;color:var(--ink);width:42%;}
+.rp-list{display:flex;flex-direction:column;gap:7px;margin-top:4px;}
+.rp-li{display:flex;align-items:flex-start;gap:8px;font-size:11px;color:var(--ink);line-height:1.5;}
+.rp-dot{width:5px;height:5px;border-radius:50%;background:var(--blue-l);margin-top:6px;flex-shrink:0;}
+.rp-dot-g{background:var(--green);}
+.rp-check{width:15px;height:15px;border-radius:5px;background:var(--green-pale);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.rp-vig-card{border-radius:10px;border:1px solid var(--border);padding:12px 14px;margin-bottom:10px;}
+.rp-vig-head{display:flex;align-items:center;gap:9px;margin-bottom:5px;}
+.rp-sev{font-size:8.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:100px;}
+.sev-mineur{background:var(--blue-pale);color:var(--blue);}
+.sev-verif{background:var(--amber-pale);color:var(--amber);}
+.sev-important{background:var(--red-pale);color:var(--red);}
+.rp-vig-t{font-size:12px;font-weight:700;color:var(--ink);}
+.rp-vig-d{font-size:10.8px;color:var(--muted);line-height:1.55;}
+.rp-vig-r{font-size:10.5px;color:var(--ink);font-weight:600;margin-top:5px;line-height:1.5;}
+.rp-vig-r span{color:var(--blue-l);font-weight:800;}
+.rp-quickscan{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 4px;}
+.rp-qs-card{background:var(--bg-soft);border:1px solid var(--border);border-radius:10px;padding:11px 12px;}
+.rp-qs-l{font-size:8.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--muted2);}
+.rp-qs-v{font-size:12px;font-weight:800;color:var(--ink);margin-top:3px;line-height:1.3;}
+.rp-sommaire{display:flex;flex-direction:column;gap:0;margin-top:6px;}
+.rp-som-row{display:flex;align-items:baseline;gap:8px;padding:8px 0;border-bottom:1px dotted var(--border);font-size:11.5px;}
+.rp-som-n{font-weight:800;color:var(--blue-l);width:20px;flex-shrink:0;}
+.rp-som-t{color:var(--ink);font-weight:600;flex:1;}
+.rp-som-p{color:var(--muted2);font-weight:700;}
+.rp-pro-block{margin-bottom:14px;}
+.rp-pro-role{font-size:11.5px;font-weight:800;color:var(--green-d);margin-bottom:6px;display:flex;align-items:center;gap:7px;}
+.rp-pro-role::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);}
+.rp-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.rp-gallery .rp-photo{aspect-ratio:1/1;}
+.rp-video-slot{aspect-ratio:1/1;border-radius:10px;overflow:hidden;border:1.5px solid var(--blue-l);background:var(--navy);position:relative;display:flex;align-items:center;justify-content:center;}
+.rp-video-slot image-slot{position:absolute;inset:0;}
+.rp-video-slot .rp-play{position:relative;z-index:1;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.3);}
+.rp-video-slot .rp-play::before{content:'';border-style:solid;border-width:8px 0 8px 13px;border-color:transparent transparent transparent #12314A;margin-left:3px;}
+.rp-video-cap{position:absolute;bottom:6px;left:6px;right:6px;font-size:8px;color:#fff;font-weight:700;background:rgba(0,0,0,.35);padding:3px 6px;border-radius:5px;}
+</style>
+</head>
+<body>
+<doc-page size="a4">
+
+<section class="page" id="p1" style="justify-content:space-between;background:linear-gradient(180deg,#fff 0%,var(--bg-soft) 100%);">
+  <div style="position:relative;z-index:1;">
+    <div class="rp-head" style="border-bottom:none;margin-bottom:0;">
+      <div class="rp-head-l">
+        <div class="rp-head-mark" style="width:30px;height:30px;border-radius:8px;"></div>
+        <div><div class="rp-head-name" style="font-size:14px;">ImmobilierEnCrete.fr</div><div class="rp-head-sub">Reporting terrain indépendant — Crète</div></div>
+      </div>
+      
+    </div>
+  </div>
+  <div style="position:relative;z-index:1;margin-top:60px;">
+    <div class="rp-eyebrow">Rapport de mission · Visite Proxy</div>
+    <h1 class="rp-h1" style="font-size:34px;">Villa avec piscine<br>Secteur Kalyves, Apokoronas</h1>
+    <p class="rp-p" style="margin-top:14px;max-width:420px;font-size:12.5px;">Rapport terrain indépendant établi à la suite d'une visite sur place, avant décision d'achat.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 40px;margin-top:34px;max-width:460px;">
+      <div><div class="rp-qs-l">Référence dossier</div><div class="rp-qs-v">VP-2026-0347</div></div>
+      <div><div class="rp-qs-l">Zone tarifaire</div><div class="rp-qs-v">Étendue (Apokoronas)</div></div>
+      <div><div class="rp-qs-l">Date de la visite</div><div class="rp-qs-v">14 juin 2026</div></div>
+      <div><div class="rp-qs-l">Date de livraison</div><div class="rp-qs-v">16 juin 2026 (48h)</div></div>
+      <div><div class="rp-qs-l">Mission</div><div class="rp-qs-v">Visite Proxy + option drone</div></div>
+      <div><div class="rp-qs-l">Client</div><div class="rp-qs-v">Dossier anonymisé</div></div>
+    </div>
+  </div>
+  <div style="position:relative;z-index:1;background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-top:40px;">
+    <p style="font-size:10px;color:var(--muted2);line-height:1.6;margin:0;"><strong style="color:var(--ink);">Confidentialité :</strong> ce document est établi exclusivement pour le client mentionné ci-dessus. Toute reproduction ou diffusion sans autorisation écrite d'ImmobilierEnCrete.fr est interdite.</p>
+  </div>
+</section>
+
+<section class="page" id="p2">
+  <div class="rp-head"><div class="rp-head-l"><div class="rp-head-mark"></div><div><div class="rp-head-name">Rapport Visite Proxy</div><div class="rp-head-sub">Réf. VP-2026-0347</div></div></div></div>
+  <div class="rp-body">
+    <div class="rp-eyebrow">Sommaire</div>
+    <h2 class="rp-h2" style="font-size:19px;">Résumé exécutif</h2>
+    <div class="rp-sommaire" style="margin-bottom:20px;">
+      <div class="rp-som-row"><span class="rp-som-n">01</span><span class="rp-som-t">Résumé exécutif</span><span class="rp-som-p">2</span></div>
+      <div class="rp-som-row"><span class="rp-som-n">02</span><span class="rp-som-t">Fiche du bien &amp; périmètre de la mission</span><span class="rp-som-p">3</span></div>
+      <div class="rp-som-row"><span class="rp-som-n">03</span><span class="rp-som-t">Accès &amp; stationnement</span><span class="rp-som-p">4</span></div>
+      <div class="rp-som-row"><span class="rp-som-n">04</span><span class="rp-som-t">Environnement &amp; voisinage</span><span class="rp-som-p">5</span></div>
+      <div class="rp-som-row"><span class="rp-som-n">05</span><span class="rp-som-t">Vue réelle &amp; bruit ambiant</span><span class="rp-som-p">6</span></div>
+      <div class="rp-som-row"><span class="rp-som-n">06</span><span class="rp-som-t">État visuel apparent</span><span class="rp-som-p">7</span></div>
+      <div class="rp-som-row"><span class="rp-som-n">07</span><span class="rp-som-t">Galerie photo &amp; vidéo drone</span><span class="rp-som-p">8</span></div>
+      <div class="rp-som-row"><span class="rp-som-n">08</span><span class="rp-som-t">Points de vigilance</span><span class="rp-som-p">9</span></div>
+      <div class="rp-som-row"><span class="rp-som-n">09</span><span class="rp-som-t">Questions à transmettre à vos professionnels</span><span class="rp-som-p">10</span></div>
+      <div class="rp-som-row" style="border-bottom:none;"><span class="rp-som-n">10</span><span class="rp-som-t">Conclusion &amp; prochaines étapes</span><span class="rp-som-p">11</span></div>
+    </div>
+    <table class="rp-table">
+      <tr><td>Client</td><td>Dossier anonymisé (exemple)</td></tr>
+      <tr><td>Bien</td><td>Villa 3 chambres avec piscine privée</td></tr>
+      <tr><td>Localisation</td><td>Secteur Kalyves, commune d'Apokoronas, ouest de la Crète</td></tr>
+      <tr><td>Zone tarifaire</td><td>Étendue — 449€ TTC</td></tr>
+      <tr><td>Option</td><td>Vidéo drone incluse (+49€ TTC)</td></tr>
+      <tr><td>Durée de la visite terrain</td><td>70 minutes</td></tr>
+      <tr><td>Intervenant</td><td>Consultant terrain ImmobilierEnCrete.fr</td></tr>
+    </table>
+    <div class="rp-quickscan">
+      <div class="rp-qs-card"><div class="rp-qs-l">Accès</div><div class="rp-qs-v">Bon, avec réserve</div></div>
+      <div class="rp-qs-card"><div class="rp-qs-l">Environnement</div><div class="rp-qs-v">Calme, agricole</div></div>
+      <div class="rp-qs-card"><div class="rp-qs-l">Vue</div><div class="rp-qs-v">Dégagée sur la vallée</div></div>
+      <div class="rp-qs-card"><div class="rp-qs-l">Points de vigilance</div><div class="rp-qs-v" style="color:var(--amber);">3 relevés</div></div>
+    </div>
+    <p class="rp-p" style="margin-top:14px;">Le bien correspond globalement à l'annonce sur l'accès, l'environnement et la vue. La visite a permis d'accéder à l'intérieur (accès autorisé par l'agence) et de confirmer l'essentiel des éléments décrits. Deux points appellent toutefois une vérification par un professionnel avant tout engagement ferme : une tache d'humidité au plafond d'une chambre, et l'état ainsi que l'implantation de la piscine par rapport à la limite de parcelle voisine. Aucun de ces points n'est nécessairement rédhibitoire, mais chacun mérite d'être confirmé avant offre. Le détail complet figure aux sections suivantes.</p>
+  </div>
+  <div class="rp-foot"><span>Document confidentiel — usage strictement personnel</span><span>Page 2 / 11</span></div>
+</section>
+
+<section class="page" id="p3">
+  <div class="rp-head"><div class="rp-head-l"><div class="rp-head-mark"></div><div><div class="rp-head-name">Rapport Visite Proxy</div><div class="rp-head-sub">Réf. VP-2026-0347</div></div></div></div>
+  <div class="rp-body">
+    <div class="rp-eyebrow">Section 02</div>
+    <h2 class="rp-h2">Fiche du bien &amp; périmètre de la mission</h2>
+    <table class="rp-table">
+      <tr><td>Type de bien</td><td>Villa individuelle, plain-pied + étage</td></tr>
+      <tr><td>Surface habitable annoncée</td><td>142 m²</td></tr>
+      <tr><td>Terrain annoncé</td><td>3 100 m²</td></tr>
+      <tr><td>Chambres / salles d'eau</td><td>3 chambres, 2 salles d'eau</td></tr>
+      <tr><td>Année de construction (annoncée)</td><td>2011, rénovation toiture en 2022</td></tr>
+      <tr><td>Piscine</td><td>Oui, 8 x 4m, annoncée « récente »</td></tr>
+      <tr><td>Vue annoncée</td><td>« Vue dégagée sur la vallée »</td></tr>
+      <tr><td>Prix affiché (annonce)</td><td>385 000 €</td></tr>
+      <tr><td>Source de l'annonce</td><td>Agence immobilière locale — lien transmis par le client</td></tr>
+    </table>
+    <h2 class="rp-h2" style="margin-top:22px;">Périmètre demandé par le client</h2>
+    <div class="rp-list">
+      <div class="rp-li"><span class="rp-dot"></span>Vérifier l'accès réel et l'état de la route jusqu'au bien.</div>
+      <div class="rp-li"><span class="rp-dot"></span>Évaluer l'environnement immédiat : voisinage, calme, nuisances éventuelles.</div>
+      <div class="rp-li"><span class="rp-dot"></span>Confirmer la vue annoncée et prendre des photos/vidéos récentes.</div>
+      <div class="rp-li"><span class="rp-dot"></span>Observer l'état apparent de la piscine et du bâti si l'accès intérieur est possible.</div>
+      <div class="rp-li"><span class="rp-dot"></span>Option ajoutée en cours de mission : vues aériennes drone du terrain.</div>
+    </div>
+    <h2 class="rp-h2" style="margin-top:22px;">Ce qui a été réalisé</h2>
+    <div class="rp-list">
+      <div class="rp-li"><span class="rp-check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#157A55" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Analyse préalable de l'annonce et des photos fournies.</div>
+      <div class="rp-li"><span class="rp-check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#157A55" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Visite terrain de 70 minutes, accès intérieur autorisé par l'agence.</div>
+      <div class="rp-li"><span class="rp-check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#157A55" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Prises de vues drone (météo favorable, conditions réunies).</div>
+      <div class="rp-li"><span class="rp-check"><svg width="9" height="9" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#157A55" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Rapport structuré livré sous 48h après la visite.</div>
+    </div>
+  </div>
+  <div class="rp-foot"><span>Document confidentiel — usage strictement personnel</span><span>Page 3 / 11</span></div>
+</section>
+
+<section class="page" id="p4">
+  <div class="rp-head"><div class="rp-head-l"><div class="rp-head-mark"></div><div><div class="rp-head-name">Rapport Visite Proxy</div><div class="rp-head-sub">Réf. VP-2026-0347</div></div></div></div>
+  <div class="rp-body">
+    <div class="rp-eyebrow">Section 03</div>
+    <h2 class="rp-h2">Accès &amp; stationnement</h2>
+    <p class="rp-p">Depuis le village de Kalyves, le trajet prend environ 6 minutes en voiture. La route départementale est bien entretenue jusqu'à un embranchement, suivi d'environ 200 derniers mètres de chemin non goudronné (terre et gravier compacté). Le passage reste praticable avec un véhicule normal par temps sec ; en période de pluie, une prudence particulière est recommandée sur ce dernier tronçon.</p>
+    <p class="rp-p" style="margin-top:10px;">Le portail d'entrée est automatique et fonctionnel (testé sur place). La cour intérieure permet de stationner 2 à 3 véhicules sans difficulté. Aucune signalétique de servitude de passage n'a été observée sur le chemin d'accès — point à confirmer auprès de l'agence ou d'un avocat (voir section Questions, page 10).</p>
+    <div class="rp-grid2" style="margin-top:20px;">
+      <div><div class="rp-photo"><image-slot id="rp-photo-1" shape="rect" placeholder="Photo — portail d'entrée et cour de stationnement"></image-slot></div><div class="rp-cap">Portail d'entrée et cour de stationnement</div></div>
+      <div><div class="rp-photo"><image-slot id="rp-photo-2" shape="rect" placeholder="Photo — derniers 200m d'accès, chemin non goudronné"></image-slot></div><div class="rp-cap">Derniers 200m d'accès (chemin non goudronné)</div></div>
+    </div>
+  </div>
+  <div class="rp-foot"><span>Document confidentiel — usage strictement personnel</span><span>Page 4 / 11</span></div>
+</section>
+
+<section class="page" id="p5">
+  <div class="rp-head"><div class="rp-head-l"><div class="rp-head-mark"></div><div><div class="rp-head-name">Rapport Visite Proxy</div><div class="rp-head-sub">Réf. VP-2026-0347</div></div></div></div>
+  <div class="rp-body">
+    <div class="rp-eyebrow">Section 04</div>
+    <h2 class="rp-h2">Environnement &amp; voisinage</h2>
+    <p class="rp-p">Le terrain est entouré de parcelles d'oliviers en exploitation. Une maison voisine est visible à environ 80 mètres à l'ouest, d'aspect entretenu, sans vis-à-vis direct sur la piscine ou la terrasse principale. L'ambiance générale est rurale et calme ; une activité agricole occasionnelle a été observée le jour de la visite (passage d'un tracteur sur le chemin voisin).</p>
+    <p class="rp-p" style="margin-top:10px;">La plage de Kalyves se trouve à environ 2,3 km (7 minutes en voiture). Les commerces de première nécessité (supérette, boulangerie, pharmacie) sont accessibles à Kalyves village en moins de 10 minutes. Aucun chantier, terrain vague ou activité bruyante n'a été identifié aux abords immédiats du bien au moment de la visite.</p>
+    <div class="rp-grid2" style="margin-top:20px;">
+      <div><div class="rp-photo"><image-slot id="rp-photo-3" shape="rect" placeholder="Photo — parcelles voisines et oliveraie"></image-slot></div><div class="rp-cap">Vue sur les parcelles voisines (oliveraie)</div></div>
+      <div><div class="rp-photo"><image-slot id="rp-photo-4" shape="rect" placeholder="Photo — panorama depuis l'entrée du terrain"></image-slot></div><div class="rp-cap">Panorama depuis l'entrée du terrain</div></div>
+    </div>
+  </div>
+  <div class="rp-foot"><span>Document confidentiel — usage strictement personnel</span><span>Page 5 / 11</span></div>
+</section>
+
+<section class="page" id="p6">
+  <div class="rp-head"><div class="rp-head-l"><div class="rp-head-mark"></div><div><div class="rp-head-name">Rapport Visite Proxy</div><div class="rp-head-sub">Réf. VP-2026-0347</div></div></div></div>
+  <div class="rp-body">
+    <div class="rp-eyebrow">Section 05</div>
+    <h2 class="rp-h2">Vue réelle &amp; bruit ambiant</h2>
+    <p class="rp-p">La vue depuis la terrasse et les abords de la piscine est effectivement dégagée sur la vallée et les collines environnantes, sans construction en premier plan — conforme à la description de l'annonce. L'orientation sud-ouest a été confirmée sur place, cohérente avec un coucher de soleil visible depuis la terrasse en fin de journée.</p>
+    <p class="rp-p" style="margin-top:10px;">Sur le plan sonore, l'ambiance était très majoritairement silencieuse pendant la visite. Quelques passages de deux-roues ont été perçus depuis la route secondaire en contrebas (à environ 80 mètres), sans caractère gênant. Aucune activité bruyante (bar, chantier, axe routier important) n'a été identifiée à proximité.</p>
+    <div style="background:var(--bg-soft);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-top:10px;"><p style="font-size:10.5px;color:var(--muted2);line-height:1.6;margin:0;"><strong style="color:var(--ink);">Limite de l'observation :</strong> la visite a eu lieu en journée. Le niveau sonore réel peut varier selon la saison, l'heure et la météo ; cette observation reflète uniquement les conditions constatées le jour de la mission.</p></div>
+    <div class="rp-grid2" style="margin-top:16px;">
+      <div><div class="rp-photo"><image-slot id="rp-photo-5" shape="rect" placeholder="Photo — vue depuis la terrasse"></image-slot></div><div class="rp-cap">Vue depuis la terrasse</div></div>
+      <div><div class="rp-photo"><image-slot id="rp-photo-6" shape="rect" placeholder="Photo — vue depuis la piscine"></image-slot></div><div class="rp-cap">Vue depuis la piscine</div></div>
+    </div>
+  </div>
+  <div class="rp-foot"><span>Document confidentiel — usage strictement personnel</span><span>Page 6 / 11</span></div>
+</section>
+
+<section class="page" id="p7">
+  <div class="rp-head"><div class="rp-head-l"><div class="rp-head-mark"></div><div><div class="rp-head-name">Rapport Visite Proxy</div><div class="rp-head-sub">Réf. VP-2026-0347</div></div></div></div>
+  <div class="rp-body">
+    <div class="rp-eyebrow">Section 06</div>
+    <h2 class="rp-h2">État visuel apparent</h2>
+    <p class="rp-p" style="margin-bottom:12px;">Observations visuelles uniquement, sans expertise technique. L'accès intérieur ayant été autorisé par l'agence, les pièces principales ont pu être visitées.</p>
+    <table class="rp-table">
+      <tr><td>Façade &amp; toiture</td><td>Bon état visuel général, aucune fissure apparente en façade. Tuiles d'aspect récent, cohérent avec la rénovation annoncée en 2022.</td></tr>
+      <tr><td>Piscine</td><td>Eau claire, margelles en bon état général. Fissures visibles sur la ligne de flottaison — voir point de vigilance détaillé page 9.</td></tr>
+      <tr><td>Intérieur</td><td>Pièces conformes aux photos de l'annonce. Une tache d'humidité au plafond de la chambre 2 — voir point de vigilance page 9.</td></tr>
+      <tr><td>Extérieurs</td><td>Jardin entretenu, système d'irrigation goutte-à-goutte fonctionnel, oliviers matures sur la parcelle.</td></tr>
+    </table>
+    <div class="rp-grid2" style="margin-top:18px;">
+      <div><div class="rp-photo"><image-slot id="rp-photo-7" shape="rect" placeholder="Photo — salon / séjour"></image-slot></div><div class="rp-cap">Salon / séjour</div></div>
+      <div><div class="rp-photo"><image-slot id="rp-photo-8" shape="rect" placeholder="Photo — chambre principale"></image-slot></div><div class="rp-cap">Chambre principale</div></div>
+    </div>
+    <div class="rp-grid2" style="margin-top:12px;">
+      <div><div class="rp-photo"><image-slot id="rp-photo-9" shape="rect" placeholder="Photo — détail tache au plafond, chambre 2"></image-slot></div><div class="rp-cap">Détail : tache au plafond (chambre 2)</div></div>
+      <div><div class="rp-photo"><image-slot id="rp-photo-10" shape="rect" placeholder="Photo — jardin et système d'irrigation"></image-slot></div><div class="rp-cap">Jardin et système d'irrigation</div></div>
+    </div>
+  </div>
+  <div class="rp-foot"><span>Document confidentiel — usage strictement personnel</span><span>Page 7 / 11</span></div>
+</section>
+
+<section class="page" id="p8">
+  <div class="rp-head"><div class="rp-head-l"><div class="rp-head-mark"></div><div><div class="rp-head-name">Rapport Visite Proxy</div><div class="rp-head-sub">Réf. VP-2026-0347</div></div></div></div>
+  <div class="rp-body">
+    <div class="rp-eyebrow">Section 07</div>
+    <h2 class="rp-h2">Galerie photo &amp; vidéo drone</h2>
+    <p class="rp-p" style="margin-bottom:12px;">Sélection de prises de vue réalisées le jour de la mission. Les fichiers originaux en haute résolution ainsi que la vidéo complète sont transmis par un lien de téléchargement séparé.</p>
+    <div class="rp-gallery">
+      <div><div class="rp-photo"><image-slot id="rp-photo-11" shape="rect" placeholder="Photo — façade principale"></image-slot></div><div class="rp-cap">Façade principale</div></div>
+      <div><div class="rp-photo"><image-slot id="rp-photo-12" shape="rect" placeholder="Photo — terrasse et piscine"></image-slot></div><div class="rp-cap">Terrasse et piscine</div></div>
+      <div><div class="rp-photo"><image-slot id="rp-photo-13" shape="rect" placeholder="Photo — cuisine"></image-slot></div><div class="rp-cap">Cuisine</div></div>
+      <div><div class="rp-photo"><image-slot id="rp-photo-14" shape="rect" placeholder="Photo — chemin d'accès"></image-slot></div><div class="rp-cap">Chemin d'accès</div></div>
+      <div><div class="rp-photo"><image-slot id="rp-photo-15" shape="rect" placeholder="Photo — terrain et oliviers"></image-slot></div><div class="rp-cap">Terrain et oliviers</div></div>
+      <div style="position:relative;"><div class="rp-video-slot"><image-slot id="rp-photo-drone" shape="rect" placeholder="Vignette vidéo drone — 45s, non montée"></image-slot><div class="rp-play"></div><span class="rp-video-cap">Vidéo drone — 45s, non montée</span></div><div class="rp-cap">Vue aérienne du terrain et de l'environnement</div></div>
+    </div>
+  </div>
+  <div class="rp-foot"><span>Document confidentiel — usage strictement personnel</span><span>Page 8 / 11</span></div>
+</section>
+
+<section class="page" id="p9">
+  <div class="rp-head"><div class="rp-head-l"><div class="rp-head-mark"></div><div><div class="rp-head-name">Rapport Visite Proxy</div><div class="rp-head-sub">Réf. VP-2026-0347</div></div></div></div>
+  <div class="rp-body">
+    <div class="rp-eyebrow">Section 08</div>
+    <h2 class="rp-h2">Points de vigilance</h2>
+    <p class="rp-p" style="margin-bottom:14px;">Ces observations sont visuelles et pratiques, réalisées sans expertise technique, juridique ou notariale. Elles signalent des points à faire confirmer par un professionnel qualifié avant tout engagement ferme.</p>
+    <div class="rp-vig-card"><div class="rp-vig-head"><span class="rp-sev sev-mineur">Mineur</span><span class="rp-vig-t">Accès non goudronné sur les 200 derniers mètres</span></div><div class="rp-vig-d">Le chemin d'accès final est en terre/gravier compacté. Praticable par temps sec, à surveiller en hiver ou fortes pluies.</div><div class="rp-vig-r">Recommandation : <span>demander à l'agence si une servitude de passage encadre ce chemin, et anticiper son entretien.</span></div></div>
+    <div class="rp-vig-card"><div class="rp-vig-head"><span class="rp-sev sev-verif">À vérifier</span><span class="rp-vig-t">Tache d'humidité au plafond — chambre 2</span></div><div class="rp-vig-d">Une tache visible a été constatée au plafond de la deuxième chambre. Elle peut correspondre à un ancien dégât résolu ou à un défaut d'étanchéité ponctuel de la toiture — impossible à trancher visuellement.</div><div class="rp-vig-r">Recommandation : <span>faire évaluer l'origine par un ingénieur ou un couvreur avant toute offre ferme.</span></div></div>
+    <div class="rp-vig-card" style="border-color:#F0C6C2;"><div class="rp-vig-head"><span class="rp-sev sev-important">Important</span><span class="rp-vig-t">Fissures sur la piscine &amp; implantation proche de la limite de parcelle</span></div><div class="rp-vig-d">Des fissures sont visibles sur la ligne de flottaison de la piscine. Par ailleurs, le muret de la piscine semble se situer à environ 0,5 m de la limite de la parcelle voisine selon les seuls repères visuels disponibles sur place — sans valeur de bornage officiel.</div><div class="rp-vig-r">Recommandation : <span>faire expertiser la structure de la piscine par un professionnel spécialisé ET faire confirmer l'implantation exacte par un géomètre avant de s'engager. Ce point peut affecter la négociation ou justifier une clause suspensive.</span></div></div>
+  </div>
+  <div class="rp-foot"><span>Document confidentiel — usage strictement personnel</span><span>Page 9 / 11</span></div>
+</section>
+
+<section class="page" id="p10">
+  <div class="rp-head"><div class="rp-head-l"><div class="rp-head-mark"></div><div><div class="rp-head-name">Rapport Visite Proxy</div><div class="rp-head-sub">Réf. VP-2026-0347</div></div></div></div>
+  <div class="rp-body">
+    <div class="rp-eyebrow">Section 09</div>
+    <h2 class="rp-h2">Questions à transmettre à vos professionnels</h2>
+    <div class="rp-pro-block"><div class="rp-pro-role">Avocat</div><div class="rp-list">
+      <div class="rp-li"><span class="rp-dot rp-dot-g"></span>Confirmer les limites exactes de la parcelle (bornage) au regard de l'implantation du muret de piscine.</div>
+      <div class="rp-li"><span class="rp-dot rp-dot-g"></span>Vérifier la conformité urbanistique de la piscine et de toute extension éventuelle.</div>
+      <div class="rp-li"><span class="rp-dot rp-dot-g"></span>Vérifier l'absence de servitude non déclarée sur le chemin d'accès.</div>
+    </div></div>
+    <div class="rp-pro-block"><div class="rp-pro-role">Ingénieur / expert bâtiment</div><div class="rp-list">
+      <div class="rp-li"><span class="rp-dot rp-dot-g"></span>Évaluer l'origine de la tache d'humidité constatée en chambre 2.</div>
+      <div class="rp-li"><span class="rp-dot rp-dot-g"></span>Expertiser l'état structurel de la piscine (fissures sur la ligne de flottaison).</div>
+      <div class="rp-li"><span class="rp-dot rp-dot-g"></span>Vérifier l'état réel de la toiture, annoncée comme rénovée en 2022.</div>
+    </div></div>
+    <div class="rp-pro-block"><div class="rp-pro-role">Notaire</div><div class="rp-list">
+      <div class="rp-li"><span class="rp-dot rp-dot-g"></span>Confirmer la surface exacte du terrain enregistrée au cadastre, au regard de la surface annoncée.</div>
+      <div class="rp-li"><span class="rp-dot rp-dot-g"></span>Vérifier l'historique des permis de construire, notamment celui de la piscine.</div>
+    </div></div>
+    <div class="rp-pro-block"><div class="rp-pro-role">Banque / conseiller financier</div><div class="rp-list">
+      <div class="rp-li"><span class="rp-dot rp-dot-g"></span>Intégrer une marge dans le plan de financement pour d'éventuels travaux (piscine, toiture).</div>
+    </div></div>
+  </div>
+  <div class="rp-foot"><span>Document confidentiel — usage strictement personnel</span><span>Page 10 / 11</span></div>
+</section>
+
+<section class="page" id="p11" style="justify-content:space-between;">
+  <div>
+  <div class="rp-head"><div class="rp-head-l"><div class="rp-head-mark"></div><div><div class="rp-head-name">Rapport Visite Proxy</div><div class="rp-head-sub">Réf. VP-2026-0347</div></div></div></div>
+  <div class="rp-body">
+    <div class="rp-eyebrow">Section 10</div>
+    <h2 class="rp-h2">Conclusion &amp; prochaines étapes</h2>
+    <p class="rp-p">Le bien correspond globalement à l'annonce sur l'accès, l'environnement et la vue, avec une ambiance rurale calme confirmée sur place. Deux points nécessitent toutefois une vérification professionnelle avant tout engagement ferme : l'origine de la tache d'humidité en chambre 2, et l'état structurel de la piscine ainsi que son implantation par rapport à la parcelle voisine. Aucun de ces éléments n'est nécessairement disqualifiant, mais chacun mérite d'être confirmé avant de faire une offre.</p>
+    <h2 class="rp-h2" style="margin-top:20px;">Prochaines étapes possibles</h2>
+    <div class="rp-list">
+      <div class="rp-li"><span class="rp-dot"></span>Échange de clarification de 15 minutes inclus dans la mission, pour répondre à vos questions sur ce rapport.</div>
+      <div class="rp-li"><span class="rp-dot"></span>Mise en relation avec une avocate francophone et un ingénieur pour les points de vigilance identifiés.</div>
+      <div class="rp-li"><span class="rp-dot"></span>Comparer avec un second bien dans le même secteur (-50% sur la deuxième Visite Proxy).</div>
+    </div>
+  </div>
+  </div>
+  <div>
+    <div style="background:var(--bg-soft);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-top:16px;"><p style="font-size:10px;color:var(--muted2);line-height:1.65;margin:0;">ImmobilierEnCrete.fr n'est pas une agence immobilière et ne vend aucun bien. Ce rapport relève du reporting terrain et de l'aide à la décision — il ne constitue ni une expertise technique, ni un avis juridique, fiscal ou notarial. Ces vérifications restent de la responsabilité de professionnels qualifiés indépendants. Le client garde toujours la décision finale.</p></div>
+    <div class="rp-foot" style="margin-top:16px;"><span>Rapport rédigé par ImmobilierEnCrete.fr — Chania, Crète · contact@immobilierencrete.fr</span><span>Page 11 / 11</span></div>
+  </div>
+</section>
+
+</doc-page>
+<script src="doc-page.js"></script>
+</body>
+</html>
