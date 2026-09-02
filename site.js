@@ -320,7 +320,7 @@ document.querySelectorAll('form[data-lead]').forEach(function(form){
     var overlay = document.createElement('div');
     overlay.id = 'exitPopupOverlay';
     overlay.style.cssText = 'position:fixed;inset:0;background:rgba(13,36,56,.55);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;';
-    var guideHref = /index\.html$|\/$/.test(location.pathname) ? '#guide' : 'index.html#guide';
+    var guideHref = /(?:\/index\.html|\/)$/.test(location.pathname) ? '#guide' : '/#guide';
     var reportPdfHref = 'assets/exemple-rapport-visite-proxy.pdf';
     overlay.innerHTML = '<div style="background:#fff;border-radius:20px;max-width:460px;width:100%;padding:36px 34px;position:relative;box-shadow:0 40px 80px -20px rgba(0,0,0,.35);">' +
       '<button id="exitPopupClose" aria-label="Fermer" style="position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:#fff;font-size:16px;cursor:pointer;">\u2715</button>' +

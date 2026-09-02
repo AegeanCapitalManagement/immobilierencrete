@@ -71,7 +71,7 @@
       back: 'start',
       options: [
         { label: 'Ouvrir le simulateur', action: 'link', href: 'simulateur.html#calculateur', style: 'primary' },
-        { label: 'Être prévenu pour le Guide', action: 'link', href: 'index.html#guide', style: 'ghost' }
+        { label: 'Être prévenu pour le Guide', action: 'link', href: '/#guide', style: 'ghost' }
       ]
     },
     installation: {
@@ -100,7 +100,7 @@
       title: 'Zones desservies',
       text: 'Intervention directe à Chania et dans tout l\u2019ouest de la Crète, jusqu\u2019à Réthymnon. Héraklion, le sud de la Crète ou plus loin vers l\u2019est : étudié au cas par cas, sur devis.',
       back: 'faq',
-      options: [{ label: 'Voir toutes les zones', action: 'link', href: 'index.html#zones', style: 'primary' }]
+      options: [{ label: 'Voir toutes les zones', action: 'link', href: '/#zones', style: 'primary' }]
     },
     faqDelai: {
       title: 'Délai du rapport',
