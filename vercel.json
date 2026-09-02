@@ -5,5 +5,25 @@
       "destination": "/",
       "permanent": true
     }
+  ],
+  "headers": [
+    {
+      "source": "/assets/nathaniel-debache.webp",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    },
+    {
+      "source": "/assets/equipe.webp",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    }
   ]
 }

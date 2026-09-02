@@ -1,9 +1,9 @@
 // Suivi de conversion respectueux du consentement — ImmobilierEnCrete.fr
-// Étape 2 : remplacez la valeur ci-dessous par l'identifiant GA4 réel (G-XXXXXXXXXX).
+// Identifiant de mesure GA4 de la propriété ImmobilierEnCrete.fr.
 (function(){
   'use strict';
 
-  var MEASUREMENT_ID = window.IEC_GA4_ID || 'G-XXXXXXXXXX';
+  var MEASUREMENT_ID = window.IEC_GA4_ID || 'G-FGM6MNNPTZ';
   var CONSENT_KEY = 'iec_analytics_consent';
   var loaded = false;
   var pendingEvents = [];
