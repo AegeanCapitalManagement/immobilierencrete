@@ -33,7 +33,11 @@ document.querySelectorAll('[data-cta-intent]').forEach(function(el){
 // Envoie un événement gtag si GA est chargé (silencieux sinon), pour suivre
 // clics WhatsApp, intentions de CTA et soumissions de formulaire par page/zone.
 function trackEvent(name, params){
-  if (typeof gtag === 'function'){ gtag('event', name, params || {}); }
+  if (typeof window.ieTrack === 'function'){
+    window.ieTrack(name, params || {});
+  } else if (typeof gtag === 'function'){
+    gtag('event', name, params || {});
+  }
 }
 document.querySelectorAll('[data-cta-intent]').forEach(function(el){
   el.addEventListener('click', function(){
@@ -43,6 +47,73 @@ document.querySelectorAll('[data-cta-intent]').forEach(function(el){
 document.querySelectorAll('#waHeaderBtn, #waStickyBtn, #waMobileLink, #waFab').forEach(function(el){
   el.addEventListener('click', function(){ trackEvent('whatsapp_click', { page: location.pathname }); });
 });
+
+// Mesure des principaux chemins de conversion, sans dépendre du libellé du bouton.
+document.addEventListener('click', function(event){
+  var link = event.target.closest && event.target.closest('a[href]');
+  if (!link || link.hasAttribute('data-cta-intent')) return;
+  var href = link.getAttribute('href') || '';
+  if (/wa\.me|whatsapp/i.test(href) && !/^wa(HeaderBtn|StickyBtn|MobileLink|Fab)$/.test(link.id || '')){
+    trackEvent('whatsapp_click', { page: location.pathname, placement: link.id || link.className || 'link' });
+  } else if (href === '#contact' || /contact\.html/.test(href)){
+    trackEvent('contact_click', { page: location.pathname, destination: href });
+  } else if (/simulateur\.html|#simulateur|#calculateur/.test(href)){
+    trackEvent('simulator_click', { page: location.pathname, destination: href });
+  } else if (/\.pdf(?:$|\?)/i.test(href) || /exemple-rapport/.test(href)){
+    trackEvent('report_view', { page: location.pathname, destination: href });
+  } else if (/guide-|blog\.html/.test(href)){
+    trackEvent('content_click', { page: location.pathname, destination: href });
+  }
+});
+
+// Ouvertures de FAQ : indicateur utile des objections avant conversion.
+document.querySelectorAll('details.faq-item').forEach(function(item){
+  item.addEventListener('toggle', function(){
+    if (!item.open) return;
+    var summary = item.querySelector('summary');
+    trackEvent('faq_open', { page: location.pathname, question: summary ? summary.textContent.trim().slice(0, 120) : '' });
+  });
+});
+
+// Profondeur de lecture : une seule mesure par seuil et par page.
+(function(){
+  var sent = {};
+  var ticking = false;
+  function measureDepth(){
+    ticking = false;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    if (max <= 0) return;
+    var depth = Math.round((window.scrollY / max) * 100);
+    [25, 50, 75, 90].forEach(function(mark){
+      if (depth >= mark && !sent[mark]){
+        sent[mark] = true;
+        trackEvent('scroll_depth', { page: location.pathname, percent: mark });
+      }
+    });
+  }
+  window.addEventListener('scroll', function(){
+    if (!ticking){ ticking = true; window.requestAnimationFrame(measureDepth); }
+  }, { passive: true });
+})();
+
+// Première interaction avec le calculateur, sans enregistrer les montants saisis.
+(function(){
+  var calculator = document.getElementById('calculateur') || document.querySelector('.calc-panel');
+  if (!calculator) return;
+  var started = false;
+  calculator.addEventListener('input', function(){
+    if (started) return;
+    started = true;
+    trackEvent('calculator_start', { page: location.pathname });
+  });
+})();
+
+if (/\/merci-mission\.html$/.test(location.pathname)){
+  trackEvent('lead_confirmation_view', { page: location.pathname });
+}
+if (/\/merci-guide\.html$/.test(location.pathname)){
+  trackEvent('guide_confirmation_view', { page: location.pathname });
+}
 
 // header shadow on scroll + sticky mobile CTA reveal
 var header = document.getElementById('header');
