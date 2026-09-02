@@ -51,6 +51,23 @@
   .value-d{font-size:13.5px;color:var(--muted);line-height:1.6;}
   .not-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;}
   .not-chip{font-size:13px;font-weight:600;color:var(--muted2);background:var(--bg-soft);border:1px solid var(--border);padding:8px 14px;border-radius:100px;}
+  .about-story-grid{grid-template-columns:minmax(260px,.82fr) minmax(0,1.18fr);align-items:start;}
+  .about-story-copy{order:2;min-width:0;}
+  .about-story-photo{order:1;min-width:0;align-self:start;}
+  .about-story-photo img{width:100%;height:auto;aspect-ratio:4/4.6;object-fit:cover;object-position:center 18%;}
+  @media (max-width:900px){
+    .about-story-grid{grid-template-columns:minmax(0,1fr);gap:32px;}
+    .about-story-photo{width:min(100%,560px);margin-inline:auto;}
+    .about-story-photo img{aspect-ratio:4/3.35;object-position:center 17%;}
+    .about-story-copy{width:100%;}
+  }
+  @media (max-width:560px){
+    .about-story-grid{gap:28px;}
+    .about-story-photo{border-radius:18px;}
+    .about-story-photo img{aspect-ratio:4/3.5;}
+    .about-story-copy .s-h2 br{display:none;}
+    .about-story-copy .origin-name span{display:block;margin-top:4px;}
+  }
 </style>
 <script src="analytics.js"></script>
 </head>
@@ -142,10 +159,10 @@
 </div>
 
 <!-- ============ PARCOURS ============ -->
-<section class="section">
+<section class="section" id="parcours">
   <div class="wrap">
-    <div class="about-grid" style="grid-template-columns:.9fr 1.1fr;">
-      <div class="reveal" style="order:2;">
+    <div class="about-grid about-story-grid">
+      <div class="reveal about-story-copy">
         <span class="eye eye-blue"><span class="eye-dot dot-blue"></span>Parcours</span>
         <h2 class="s-h2">Une expertise juridique<br>et patrimoniale, sur le terrain.</h2>
         <p class="s-p">Diplômé d'un Master en droit privé et d'un Master en gestion de patrimoine (Université de Nice Sophia-Antipolis), j'ai exercé comme consultant immobilier puis comme conseiller financier en banque, avant de m'installer en Crète en 2021.</p>
@@ -155,8 +172,8 @@
           <div class="origin-name">J. Cocatre <span>— ancienne habitante de Saint-Andiol (France), aujourd'hui propriétaire à <a href="stavros.html">Stavros</a></span></div>
         </div>
       </div>
-      <div class="zones-map reveal" style="order:1;">
-        <img id="zones-map-illustration" src="assets/nathaniel-debache.webp" alt="Photo de Nathaniel Debache" style="width:100%;height:auto;aspect-ratio:4/4.6;display:block;object-fit:cover;border-radius:0px;" loading="lazy" width="900" height="1200" decoding="async">
+      <div class="zones-map reveal about-story-photo">
+        <img id="zones-map-illustration" src="assets/nathaniel-debache.webp" alt="Photo de Nathaniel Debache" loading="lazy" width="900" height="1200" decoding="async">
       </div>
     </div>
   </div>

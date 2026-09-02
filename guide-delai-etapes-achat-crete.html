@@ -74,6 +74,10 @@
   .step-dur{font-size:13px;font-weight:800;color:var(--blue-l);white-space:nowrap;}
   .step-t{font-size:15.5px;font-weight:700;color:var(--ink);margin-bottom:4px;}
   .step-d{font-size:14px;color:var(--muted);line-height:1.6;}
+  @media (max-width:560px){
+    .step-item{grid-template-columns:1fr;gap:6px;padding:16px 0;}
+    .step-dur{white-space:normal;}
+  }
 </style>
 </head>
 <body>
