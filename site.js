@@ -108,11 +108,216 @@ document.querySelectorAll('details.faq-item').forEach(function(item){
   });
 })();
 
+// ---------- Attribution consentie + contexte commercial des formulaires ----------
+// Les paramètres visibles sur la page courante peuvent accompagner une demande
+// volontairement envoyée. La conservation first/last touch dans localStorage ne
+// commence, elle, qu'après l'accord Analytics et s'arrête dès son retrait.
+(function(){
+  var STORAGE_KEY = 'iec_attribution_v1';
+  var STORAGE_VERSION = 1;
+  var STORAGE_TTL = 180 * 24 * 60 * 60 * 1000;
+
+  function clean(value, max){
+    return String(value || '').trim().replace(/[\r\n\t]+/g, ' ').slice(0, max || 160);
+  }
+
+  function normalize(value){
+    var text = clean(value, 200).toLowerCase();
+    if (text.normalize) text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    return text;
+  }
+
+  function referrerHost(){
+    if (!document.referrer) return '';
+    try {
+      var host = new URL(document.referrer).hostname.toLowerCase().replace(/^www\./, '');
+      var own = location.hostname.toLowerCase().replace(/^www\./, '');
+      return host === own ? '' : clean(host, 120);
+    } catch (e) { return ''; }
+  }
+
+  function inferSource(params, partnerRef, refHost){
+    var explicitSource = clean(params.get('utm_source'), 100);
+    var explicitMedium = clean(params.get('utm_medium'), 100);
+    if (explicitSource) return { source: explicitSource, medium: explicitMedium || 'campaign' };
+    if (partnerRef) return { source: partnerRef, medium: 'partner' };
+    if (refHost){
+      if (/(^|\.)google\.|(^|\.)bing\.com$|duckduckgo\.com$|ecosia\.org$|yahoo\./.test(refHost)){
+        return { source: refHost.indexOf('google.') !== -1 ? 'google' : refHost.split('.')[0], medium: 'organic' };
+      }
+      return { source: refHost, medium: 'referral' };
+    }
+    return { source: 'direct', medium: 'none' };
+  }
+
+  function currentTouch(){
+    var params = new URLSearchParams(location.search);
+    var partnerRef = clean(params.get('ref'), 100);
+    var host = referrerHost();
+    var inferred = inferSource(params, partnerRef, host);
+    return {
+      source: inferred.source,
+      medium: inferred.medium,
+      campaign: clean(params.get('utm_campaign'), 140),
+      term: clean(params.get('utm_term'), 140),
+      content: clean(params.get('utm_content'), 140),
+      partner_ref: partnerRef,
+      landing_page: clean(location.pathname || '/', 180),
+      referrer_host: host,
+      captured_at: new Date().toISOString()
+    };
+  }
+
+  var pageTouch = currentTouch();
+
+  function consentValue(){
+    return typeof window.iecGetAnalyticsConsent === 'function' ? window.iecGetAnalyticsConsent() : null;
+  }
+
+  function readStored(){
+    var raw;
+    try { raw = localStorage.getItem(STORAGE_KEY); } catch (e) { return null; }
+    if (!raw) return null;
+    try {
+      var record = JSON.parse(raw);
+      var valid = record && record.version === STORAGE_VERSION && Number.isFinite(record.savedAt) && Date.now() - record.savedAt <= STORAGE_TTL;
+      if (!valid){ localStorage.removeItem(STORAGE_KEY); return null; }
+      return record;
+    } catch (e) {
+      try { localStorage.removeItem(STORAGE_KEY); } catch (ignore) {}
+      return null;
+    }
+  }
+
+  function meaningfulTouch(touch){
+    return Boolean(touch.partner_ref || touch.campaign || touch.term || touch.content || touch.referrer_host || touch.source !== 'direct');
+  }
+
+  function updateStored(){
+    if (consentValue() !== 'granted'){
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+      return;
+    }
+    var existing = readStored();
+    var record = existing || { version: STORAGE_VERSION, savedAt: Date.now(), first: pageTouch, last: pageTouch };
+    if (!record.first) record.first = pageTouch;
+    if (!record.last || meaningfulTouch(pageTouch)) record.last = pageTouch;
+    record.savedAt = Date.now();
+    record.version = STORAGE_VERSION;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(record)); } catch (e) {}
+  }
+
+  function addTouch(target, prefix, touch){
+    if (!touch) return;
+    target[prefix + '_source'] = clean(touch.source, 100);
+    target[prefix + '_medium'] = clean(touch.medium, 100);
+    target[prefix + '_campaign'] = clean(touch.campaign, 140);
+    target[prefix + '_term'] = clean(touch.term, 140);
+    target[prefix + '_content'] = clean(touch.content, 140);
+    target[prefix + '_partner_ref'] = clean(touch.partner_ref, 100);
+    target[prefix + '_landing_page'] = clean(touch.landing_page, 180);
+    target[prefix + '_referrer_host'] = clean(touch.referrer_host, 120);
+    target[prefix + '_captured_at'] = clean(touch.captured_at, 40);
+  }
+
+  function formId(form){
+    if (form && form.getAttribute('data-form-id')) return clean(form.getAttribute('data-form-id'), 80);
+    var page = (location.pathname || '/').replace(/^\/+|\.html$|\/+$/g, '').replace(/[^a-z0-9]+/gi, '_') || 'homepage';
+    var id = form && form.id ? form.id.replace(/[^a-z0-9]+/gi, '_') : 'form';
+    return clean(page + '__' + id, 80);
+  }
+
+  function leadType(intent){
+    var value = normalize(intent);
+    if (/simulat|budget/.test(value)) return 'simulateur';
+    if (/install|afm|amka|efka/.test(value)) return 'installation';
+    if (/visite|annonce|bien repere|proxy/.test(value)) return 'visite_proxy';
+    return 'contact';
+  }
+
+  function createLeadId(){
+    if (window.crypto && typeof window.crypto.randomUUID === 'function') return window.crypto.randomUUID();
+    return 'iec-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+  }
+
+  function leadContext(form, intent, existingId){
+    var stored = consentValue() === 'granted' ? readStored() : null;
+    var context = {
+      lead_id: clean(existingId || createLeadId(), 80),
+      lead_type: leadType(intent),
+      form_id: formId(form),
+      page_path: clean(location.pathname || '/', 180),
+      attribution_consent: consentValue() === 'granted' ? 'granted' : (consentValue() === 'denied' ? 'denied' : 'not_chosen'),
+      attribution_version: String(STORAGE_VERSION)
+    };
+    addTouch(context, 'current', pageTouch);
+    if (stored){
+      addTouch(context, 'first', stored.first);
+      addTouch(context, 'last', stored.last);
+    }
+    return context;
+  }
+
+  function ensureField(form, name, value){
+    var field = form.querySelector('[name="' + name.replace(/"/g, '') + '"]');
+    if (!field){
+      field = document.createElement('input');
+      field.type = 'hidden';
+      field.name = name;
+      form.appendChild(field);
+    }
+    field.value = value == null ? '' : String(value);
+  }
+
+  window.iecCreateLeadId = createLeadId;
+  window.iecResolveLeadType = leadType;
+  window.iecGetLeadContext = leadContext;
+  window.iecPrepareNativeLeadFallback = function(form, payload){
+    Object.keys(payload || {}).forEach(function(key){
+      var value = payload[key];
+      if (value == null || typeof value === 'object') return;
+      ensureField(form, key, value);
+    });
+    var query = new URLSearchParams({
+      lead_type: payload.lead_type || 'contact'
+    });
+    ensureField(form, '_next', 'https://www.immobilierencrete.fr/merci-demande.html?' + query.toString());
+    ensureField(form, '_captcha', 'false');
+    ensureField(form, '_template', 'table');
+  };
+
+  document.addEventListener('iec:consent-changed', updateStored);
+  updateStored();
+
+  document.querySelectorAll('#contact-form, #calc-email-form').forEach(function(form){
+    var started = false;
+    form.addEventListener('focusin', function(){
+      if (started) return;
+      started = true;
+      var intentField = form.querySelector('[name="objet"]');
+      var intent = intentField ? intentField.value : (form.id === 'calc-email-form' ? 'Simulateur budget' : 'Contact');
+      trackEvent('form_start', { lead_type: leadType(intent), form_id: formId(form), page: location.pathname });
+    });
+  });
+})();
+
 if (/\/merci-mission\.html$/.test(location.pathname)){
   trackEvent('lead_confirmation_view', { page: location.pathname });
 }
 if (/\/merci-guide\.html$/.test(location.pathname)){
   trackEvent('guide_confirmation_view', { page: location.pathname });
+}
+if (/\/merci-demande\.html$/.test(location.pathname)){
+  var confirmationParams = new URLSearchParams(location.search);
+  var confirmedLeadType = confirmationParams.get('lead_type');
+  if (['visite_proxy', 'installation', 'simulateur', 'contact'].indexOf(confirmedLeadType) !== -1){
+    trackEvent('generate_lead', {
+      lead_type: confirmedLeadType,
+      form_id: 'html_fallback',
+      submission_method: 'html_fallback'
+    });
+    if (history.replaceState) history.replaceState({}, document.title, location.pathname);
+  }
 }
 
 // header shadow on scroll + sticky mobile CTA reveal
@@ -231,63 +436,80 @@ if (contactForm){
     var data = new FormData(contactForm);
     // Anti-spam honeypot: bots fill hidden fields, humans never see them.
     if (data.get('_hp_website')){ return; }
-    var subject = 'Demande ImmobilierEnCrete.fr \u2014 ' + (data.get('objet') || 'Contact');
+    var intent = data.get('objet') || 'Contact';
+    var leadId = typeof window.iecCreateLeadId === 'function' ? window.iecCreateLeadId() : 'iec-' + Date.now();
+    var leadContext = typeof window.iecGetLeadContext === 'function' ? window.iecGetLeadContext(contactForm, intent, leadId) : {
+      lead_id: leadId,
+      lead_type: 'contact',
+      form_id: location.pathname + '#contact-form',
+      page_path: location.pathname
+    };
+    var subject = 'Demande ImmobilierEnCrete.fr \u2014 ' + intent + ' \u2014 ' + leadContext.lead_id;
     var lines = [
+      'Identifiant lead : ' + leadContext.lead_id,
+      'Type de lead : ' + leadContext.lead_type,
       'Nom : ' + (data.get('nom') || ''),
       'E-mail : ' + (data.get('email') || ''),
       'T\u00e9l\u00e9phone : ' + (data.get('telephone') || '\u2014'),
-      'Objet : ' + (data.get('objet') || ''),
+      'Objet : ' + intent,
       'Lien annonce : ' + (data.get('url') || '\u2014')
     ];
     if (data.has('ville')) lines.push('Ville / village du bien : ' + (data.get('ville') || '\u2014'));
     if (data.has('secteur')) lines.push('Secteur : ' + (data.get('secteur') || '\u2014'));
     if (data.has('source')) lines.push('Agence ou propri\u00e9taire direct : ' + (data.get('source') || '\u2014'));
+    lines.push('Source actuelle : ' + (leadContext.current_source || 'direct'));
+    lines.push('Support actuel : ' + (leadContext.current_medium || 'none'));
+    if (leadContext.current_campaign) lines.push('Campagne : ' + leadContext.current_campaign);
+    if (leadContext.current_partner_ref) lines.push('Partenaire : ' + leadContext.current_partner_ref);
+    if (leadContext.first_source) lines.push('Première source consentie : ' + leadContext.first_source + ' / ' + (leadContext.first_medium || ''));
+    if (leadContext.last_source) lines.push('Dernière source consentie : ' + leadContext.last_source + ' / ' + (leadContext.last_medium || ''));
+    lines.push('Page du formulaire : ' + location.pathname);
     lines.push('', 'Message :', (data.get('message') || '\u2014'));
     var submitBtn = contactForm.querySelector('.contact-submit');
     var confirmEl = document.getElementById('contact-confirm');
 
-    function ensureHiddenField(name, value){
-      var field = contactForm.querySelector('input[name="' + name + '"]');
-      if (!field){
-        field = document.createElement('input');
-        field.type = 'hidden';
-        field.name = name;
-        contactForm.appendChild(field);
-      }
-      field.value = value;
-    }
-
-    function submitWithHtmlFallback(){
-      ensureHiddenField('_subject', subject);
-      ensureHiddenField('_next', 'https://www.immobilierencrete.fr/merci-mission.html');
-      ensureHiddenField('_captcha', 'false');
-      ensureHiddenField('_template', 'table');
-      HTMLFormElement.prototype.submit.call(contactForm);
-    }
-
-    if (submitBtn){ submitBtn.disabled = true; }
-    sendToFormSubmit({
+    var payload = Object.assign({}, leadContext, {
       _subject: subject,
       _captcha: 'false',
       _template: 'table',
       name: data.get('nom') || 'Visiteur ImmobilierEnCrete.fr',
       email: data.get('email') || '',
+      telephone: data.get('telephone') || '',
+      objet: intent,
+      url_annonce: data.get('url') || '',
+      ville: data.get('ville') || '',
+      secteur: data.get('secteur') || '',
+      provenance_annonce: data.get('source') || '',
       message: lines.join('\n')
-    }).then(function(res){
+    });
+
+    function submitWithHtmlFallback(){
+      if (typeof window.iecPrepareNativeLeadFallback === 'function') window.iecPrepareNativeLeadFallback(contactForm, payload);
+      HTMLFormElement.prototype.submit.call(contactForm);
+    }
+
+    if (submitBtn){ submitBtn.disabled = true; }
+    trackEvent('form_submit_attempt', { lead_type: leadContext.lead_type, form_id: leadContext.form_id, page: location.pathname });
+    sendToFormSubmit(payload).then(function(res){
       if (submitBtn){ submitBtn.disabled = false; }
       if (res && res.success){
         if (confirmEl){
           confirmEl.style.color = '';
-          confirmEl.textContent = 'Merci, votre demande a bien été envoyée. Réponse en français sous 48h ouvrées.';
+          confirmEl.textContent = 'Merci, votre demande a bien été envoyée. Réponse en français sous 24h ouvrées.';
           confirmEl.hidden = false;
         }
-        trackEvent('lead_submit', { intent: data.get('objet') || 'Contact', page: location.pathname });
-        trackEvent('generate_lead', { intent: data.get('objet') || 'Contact', page: location.pathname });
+        trackEvent('generate_lead', {
+          lead_type: leadContext.lead_type,
+          form_id: leadContext.form_id,
+          submission_method: 'ajax'
+        });
         contactForm.reset();
       } else {
+        trackEvent('form_ajax_fallback', { lead_type: leadContext.lead_type, form_id: leadContext.form_id, page: location.pathname });
         submitWithHtmlFallback();
       }
     }).catch(function(){
+      trackEvent('form_ajax_fallback', { lead_type: leadContext.lead_type, form_id: leadContext.form_id, page: location.pathname });
       submitWithHtmlFallback();
     });
   });

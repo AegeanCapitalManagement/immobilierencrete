@@ -59,8 +59,9 @@
     <li>Objet de la demande (Visite Proxy, Pack Installation, simulateur, ressources, autre)</li>
     <li>Lien de l'annonce concernée (facultatif)</li>
     <li>Contenu du message et informations que vous choisissez de communiquer (zone recherchée, budget, délai, points à vérifier)</li>
+    <li>Lors de l'envoi d'un formulaire : page d'origine de la demande, domaine référent et paramètres de campagne ou de partenaire présents dans l'adresse consultée</li>
   </ul>
-  <p>Lorsque vous consultez le site, l'hébergeur reçoit les données techniques nécessaires à la fourniture et à la sécurité du service (par exemple adresse IP, navigateur, date et ressource demandée). Si vous acceptez la mesure d'audience, Google Analytics 4 reçoit également des informations sur les pages consultées et les interactions décrites à la section 8.</p>
+  <p>Lorsque vous consultez le site, l'hébergeur reçoit les données techniques nécessaires à la fourniture et à la sécurité du service (par exemple adresse IP, navigateur, date et ressource demandée). Lorsqu'un formulaire est volontairement envoyé, le contexte d'origine disponible sur cette page peut être joint à la demande afin d'identifier les canaux utiles. Le chemin complet d'une page référente externe n'est pas conservé : seul son domaine est utilisé. Si vous acceptez la mesure d'audience, Google Analytics 4 reçoit également des informations sur les pages consultées et les interactions décrites à la section 8.</p>
   <p>Nous ne demandons aucune donnée sensible (santé, opinions, origine, etc.). Merci de ne pas transmettre ce type d'information dans les champs libres.</p>
 
   <h2>3. Finalités et base légale du traitement</h2>
@@ -71,6 +72,7 @@
     <tr><td>Vous adresser les nouveautés ou l'ouverture d'une ressource lorsque vous vous êtes inscrit à cette fin</td><td>Consentement, retirable à tout moment</td></tr>
     <tr><td>Établissement d'un devis ou d'un rapport de mission</td><td>Exécution du contrat de service</td></tr>
     <tr><td>Respect des obligations comptables et fiscales</td><td>Obligation légale</td></tr>
+    <tr><td>Mesurer l'origine des demandes effectivement envoyées (page, domaine référent, campagne ou partenaire)</td><td>Intérêt légitime à évaluer l'efficacité des canaux commerciaux ; la conservation first/last touch sur l'appareil reste soumise au consentement</td></tr>
     <tr><td>Mesurer l'audience et les conversions avec Google Analytics 4</td><td>Consentement</td></tr>
   </table>
   <p style="margin-top:14px;">Vos données ne sont ni vendues, ni louées, ni transmises à des tiers à des fins commerciales ou publicitaires.</p>
@@ -93,11 +95,12 @@
   <table>
     <tr><th>Traceur</th><th>Finalité et durée</th></tr>
     <tr><td><code>iec_analytics_consent</code> (stockage local)</td><td>Mémorise votre choix afin de ne pas vous solliciter à chaque visite. Durée : 6 mois.</td></tr>
+    <tr><td><code>iec_attribution_v1</code> (stockage local)</td><td>Après acceptation uniquement, mémorise la première et la dernière origine de visite (source, support, campagne, partenaire, page d'entrée et domaine référent). Durée maximale : 6 mois. Supprimé en cas de refus ou de retrait.</td></tr>
     <tr><td><code>simulateurUnlocked</code> (stockage local)</td><td>Conserve l'accès au détail du simulateur demandé par l'utilisateur. Durée : 6 mois.</td></tr>
     <tr><td><code>_ga</code> et <code>_ga_*</code></td><td>Mesure d'audience et de conversion Google Analytics 4, uniquement après acceptation. Durée maximale configurée : 13 mois, sans renouvellement automatique.</td></tr>
   </table>
   <p style="margin-top:14px;">En cas d'acceptation, les événements peuvent concerner les pages consultées, la profondeur de lecture, les clics vers les formulaires, WhatsApp, le simulateur, les rapports et les envois de formulaire réussis. Leur conservation dans la propriété Analytics est limitée à 14 mois maximum. Les signaux Google, le stockage publicitaire et la personnalisation publicitaire restent désactivés.</p>
-  <p>Votre refus est aussi simple que votre acceptation. Vous pouvez retirer ou modifier votre choix à tout moment avec le bouton <strong>Gérer mes cookies</strong> présent en bas du site. Un retrait supprime les cookies Google Analytics accessibles depuis ce domaine et arrête immédiatement toute nouvelle mesure.</p>
+  <p>Votre refus est aussi simple que votre acceptation. Vous pouvez retirer ou modifier votre choix à tout moment avec le bouton <strong>Gérer mes cookies</strong> présent en bas du site. Un retrait supprime les cookies Google Analytics accessibles depuis ce domaine, efface l'attribution first/last touch stockée sur l'appareil et arrête immédiatement toute nouvelle mesure.</p>
   <button class="privacy-manage" type="button" onclick="var b=document.getElementById('analyticsManage');if(b){b.click();}">Gérer mes cookies</button>
 
   <h2>9. Vos droits</h2>

@@ -213,7 +213,7 @@
 <div class="reass">
   <div class="wrap reass-row">
     <div class="reass-item"><div class="reass-ic">✅</div><span class="reass-txt">Estimation gratuite &amp; indicative</span></div>
-    <div class="reass-item"><div class="reass-ic">⏱️</div><span class="reass-txt">Réponse en français sous 48h ouvrées</span></div>
+    <div class="reass-item"><div class="reass-ic">⏱️</div><span class="reass-txt">Réponse en français sous 24h ouvrées</span></div>
     <div class="reass-item"><div class="reass-ic">🤝</div><span class="reass-txt">Sans engagement</span></div>
     <div class="reass-item"><div class="reass-ic">🗣️</div><span class="reass-txt">Fondateur francophone, installé en Crète</span></div>
   </div>
@@ -395,7 +395,7 @@
       </div>
       <form class="contact-form" id="contact-form" method="post" action="https://formsubmit.co/contact@immobilierencrete.fr">
         <input type="hidden" name="_subject" value="Nouvelle demande ImmobilierEnCrete.fr">
-        <input type="hidden" name="_next" value="https://www.immobilierencrete.fr/merci-mission.html">
+        <input type="hidden" name="_next" value="https://www.immobilierencrete.fr/merci-demande.html">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
         <input type="text" name="_hp_website" id="_hp_website" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
@@ -418,7 +418,7 @@
         <div class="field full">
           <button class="btn btn-primary contact-submit" type="submit">Envoyer ma demande <span class="arrow">→</span></button>
           <p class="contact-confirm" id="contact-confirm" role="status" aria-live="polite" hidden>Votre demande sera envoyée directement depuis ce formulaire. Aucun logiciel de messagerie n’est nécessaire.</p>
-          <p class="contact-note">Réponse en français, sous 48h ouvrées. Estimation gratuite et sans engagement.</p>
+          <p class="contact-note">Réponse en français, sous 24h ouvrées. Estimation gratuite et sans engagement.</p>
           <p class="contact-note">Les informations transmises sont utilisées uniquement pour répondre à votre demande. <a href="confidentialite.html">Politique de confidentialité</a>.</p>
         </div>
       </form>
@@ -569,6 +569,13 @@
         e.preventDefault();
         var email = document.getElementById('calc-email').value;
         var note = document.getElementById('calc-email-note');
+        var leadId = typeof window.iecCreateLeadId === 'function' ? window.iecCreateLeadId() : 'iec-' + Date.now();
+        var leadContext = typeof window.iecGetLeadContext === 'function' ? window.iecGetLeadContext(emailForm, 'Simulateur budget', leadId) : {
+          lead_id: leadId,
+          lead_type: 'simulateur',
+          form_id: 'simulateur__calc_email_form',
+          page_path: location.pathname
+        };
         var summary = 'Prix : ' + document.getElementById('calc-out-price').textContent +
           ' | Budget total estimé : ' + document.getElementById('calc-out-total').textContent +
           ' | Marge : ' + marginRange.value + '%';
@@ -581,23 +588,51 @@
         // Lead magnet : « Checklist 20 points de vigilance avant de réserver un vol ».
         // Tant qu'aucun envoi automatique n'est branché (ESP / autorépondeur), le PDF est
         // à joindre manuellement en réponse à chaque demande reçue par e-mail ci-dessous.
+        var payload = Object.assign({}, leadContext, {
+          _subject: 'Simulateur ImmobilierEnCrete.fr — estimation + checklist demandées — ' + leadContext.lead_id,
+          _captcha: 'false',
+          _template: 'table',
+          name: 'Simulateur',
+          email: email,
+          prix_bien: document.getElementById('calc-out-price').textContent,
+          budget_total_estime: document.getElementById('calc-out-total').textContent,
+          marge_securite: marginRange.value + '%',
+          message: summary + ' | Lead magnet demandé : Checklist 20 points de vigilance (PDF à joindre manuellement)'
+        });
+        if (typeof trackEvent === 'function'){
+          trackEvent('form_submit_attempt', { lead_type: 'simulateur', form_id: leadContext.form_id, page: location.pathname });
+        }
         fetch('https://formsubmit.co/ajax/' + encodeURIComponent('contact@immobilierencrete.fr'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            _subject: 'Simulateur ImmobilierEnCrete.fr — estimation + checklist demandées',
-            name: 'Simulateur',
-            email: email,
-            message: summary + ' | Lead magnet demandé : Checklist 20 points de vigilance (PDF à joindre manuellement)'
-          })
+          body: JSON.stringify(payload)
         }).then(function(r){ return r.json(); }).then(function(res){
           if (res && res.success){
             done('Merci ! Votre estimation et la checklist vous seront envoyées par e-mail.');
+            if (typeof trackEvent === 'function'){
+              trackEvent('generate_lead', {
+                lead_type: 'simulateur',
+                form_id: leadContext.form_id,
+                submission_method: 'ajax'
+              });
+            }
           } else {
-            if (note){ note.textContent = 'Une erreur est survenue — réessayez, ou écrivez-nous sur WhatsApp.'; note.style.color = '#B3261E'; }
+            if (typeof window.iecPrepareNativeLeadFallback === 'function'){
+              window.iecPrepareNativeLeadFallback(emailForm, payload);
+              HTMLFormElement.prototype.submit.call(emailForm);
+            } else if (note){
+              note.textContent = 'Une erreur est survenue — réessayez, ou écrivez-nous sur WhatsApp.';
+              note.style.color = '#B3261E';
+            }
           }
         }).catch(function(){
-          if (note){ note.textContent = 'Une erreur est survenue — réessayez, ou écrivez-nous sur WhatsApp.'; note.style.color = '#B3261E'; }
+          if (typeof window.iecPrepareNativeLeadFallback === 'function'){
+            window.iecPrepareNativeLeadFallback(emailForm, payload);
+            HTMLFormElement.prototype.submit.call(emailForm);
+          } else if (note){
+            note.textContent = 'Une erreur est survenue — réessayez, ou écrivez-nous sur WhatsApp.';
+            note.style.color = '#B3261E';
+          }
         });
       });
     }

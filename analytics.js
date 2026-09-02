@@ -49,6 +49,18 @@
     } catch (e) {}
   }
 
+  function notifyConsent(value){
+    try {
+      document.dispatchEvent(new CustomEvent('iec:consent-changed', {
+        detail: { value: value }
+      }));
+    } catch (e) {}
+  }
+
+  // Lecture seule utilisée par le module d'attribution du site. Elle évite
+  // toute persistance marketing tant que l'utilisateur n'a pas accepté.
+  window.iecGetAnalyticsConsent = getConsent;
+
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
 
@@ -161,6 +173,7 @@
     var granted = value === 'granted';
     var analyticsWasLoaded = loaded || Boolean(document.getElementById('iec-ga4-script'));
     saveConsent(granted ? 'granted' : 'denied');
+    notifyConsent(granted ? 'granted' : 'denied');
     removeBanner();
 
     if (granted){
@@ -222,8 +235,10 @@
   function init(){
     injectConsentStyles();
     addManageButton();
-    if (getConsent() === 'granted') loadAnalytics();
-    else if (getConsent() === null) showBanner(false);
+    var consent = getConsent();
+    notifyConsent(consent);
+    if (consent === 'granted') loadAnalytics();
+    else if (consent === null) showBanner(false);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
