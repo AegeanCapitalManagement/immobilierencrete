@@ -21,10 +21,12 @@
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
+  "@id": "https://www.immobilierencrete.fr/#business",
   "name": "ImmobilierEnCrete.fr",
   "description": "Reporting terrain indépendant, aide à la décision et coordination acheteur pour les francophones achetant ou s'installant en Crète, avec intervention directe à Chania et dans l'ouest de l'île.",
   "areaServed": ["Chania", "Akrotiri", "Apokoronas", "Platanias", "Souda", "Stavros", "Kalyves", "Almyrida", "Kissamos"],
   "url": "https://www.immobilierencrete.fr/",
+  "logo": "https://www.immobilierencrete.fr/assets/logo-horizontal.png",
   "image": "https://www.immobilierencrete.fr/assets/equipe.webp",
   "telephone": "+30 695 571 7183",
   "priceRange": "€€",
@@ -43,6 +45,18 @@
       {"@type": "Offer", "name": "Guide Acheter en Crète", "priceCurrency": "EUR", "price": "9", "availability": "https://schema.org/PreOrder"}
     ]
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://www.immobilierencrete.fr/#website",
+  "url": "https://www.immobilierencrete.fr/",
+  "name": "Immobilier en Crète",
+  "alternateName": "ImmobilierEnCrete.fr",
+  "inLanguage": "fr-FR",
+  "publisher": {"@id": "https://www.immobilierencrete.fr/#business"}
 }
 </script>
 <script type="application/ld+json">
@@ -1021,11 +1035,6 @@
   </div>
 </section>
 
-<!-- ============ PARRAINAGE (mention discrète) ============ -->
-<div class="wrap" id="parrainage" style="padding-block:20px;text-align:center;">
-  <p style="font-size:13px;color:var(--muted2);">Vous connaissez quelqu'un qui prépare un projet en Crète ? <a href="#contact" data-cta-intent="Parrainage" style="font-weight:700;color:var(--blue-l);">Parrainez-le et bénéficiez tous les deux d'un avantage →</a></p>
-</div>
-
 <!-- ============ FAQ ============ -->
 <section class="section section-tight seam-top" id="faq">
   <div class="wrap">
@@ -1133,7 +1142,6 @@
     <div class="f-links">
       <a href="about.html">À propos</a>
       <a href="contact.html">Contact</a>
-      <a href="#parrainage">Parrainage</a>
       <a href="blog.html">Blog</a>
       <a href="cgv.html">CGV</a>
       <a href="mentions-legales.html">Mentions légales</a>

@@ -482,6 +482,7 @@ image-slot::part(empty){color:var(--navy2);gap:10px;}
 .related-card.zone-card{background:var(--green-pale);border-color:#CDEEDF;}
 .related-card.zone-card:hover{border-color:var(--green);}
 .related-card.zone-card .arrow{color:var(--green-d);}
+.article-meta a{color:var(--blue);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;}
 
 /* ---------- responsive safety net ---------- */
 .article-table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
