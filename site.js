@@ -222,7 +222,8 @@ document.querySelectorAll('form').forEach(function(form){
   if (!form.getAttribute('action')) form.setAttribute('action', 'https://formsubmit.co/' + FORM_DESTINATION_EMAIL);
 });
 
-// contact form: sends via FormSubmit.co, falls back to a pre-filled mailto if the request fails
+// Contact form: direct AJAX submission, with a native HTML POST fallback.
+// The visitor never needs a configured e-mail application.
 var contactForm = document.getElementById('contact-form');
 if (contactForm){
   contactForm.addEventListener('submit', function(e){
@@ -245,17 +246,30 @@ if (contactForm){
     var submitBtn = contactForm.querySelector('.contact-submit');
     var confirmEl = document.getElementById('contact-confirm');
 
-    function fallbackError(){
-      if (confirmEl){
-        confirmEl.textContent = 'Une erreur est survenue lors de l\u2019envoi. R\u00e9essayez, ou \u00e9crivez-nous directement sur WhatsApp.';
-        confirmEl.style.color = '#B3261E';
-        confirmEl.hidden = false;
+    function ensureHiddenField(name, value){
+      var field = contactForm.querySelector('input[name="' + name + '"]');
+      if (!field){
+        field = document.createElement('input');
+        field.type = 'hidden';
+        field.name = name;
+        contactForm.appendChild(field);
       }
+      field.value = value;
+    }
+
+    function submitWithHtmlFallback(){
+      ensureHiddenField('_subject', subject);
+      ensureHiddenField('_next', 'https://www.immobilierencrete.fr/merci-mission.html');
+      ensureHiddenField('_captcha', 'false');
+      ensureHiddenField('_template', 'table');
+      HTMLFormElement.prototype.submit.call(contactForm);
     }
 
     if (submitBtn){ submitBtn.disabled = true; }
     sendToFormSubmit({
       _subject: subject,
+      _captcha: 'false',
+      _template: 'table',
       name: data.get('nom') || 'Visiteur ImmobilierEnCrete.fr',
       email: data.get('email') || '',
       message: lines.join('\n')
@@ -268,13 +282,13 @@ if (contactForm){
           confirmEl.hidden = false;
         }
         trackEvent('lead_submit', { intent: data.get('objet') || 'Contact', page: location.pathname });
+        trackEvent('generate_lead', { intent: data.get('objet') || 'Contact', page: location.pathname });
         contactForm.reset();
       } else {
-        fallbackError();
+        submitWithHtmlFallback();
       }
     }).catch(function(){
-      if (submitBtn){ submitBtn.disabled = false; }
-      fallbackError();
+      submitWithHtmlFallback();
     });
   });
 }

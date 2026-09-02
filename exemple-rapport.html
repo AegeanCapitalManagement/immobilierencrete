@@ -36,9 +36,7 @@
   ]
 }
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/fonts.css">
 <link rel="stylesheet" href="site.css">
 <style>
   .rep-outline{display:flex;flex-direction:column;gap:0;margin-top:44px;border-top:1px solid var(--border);}
@@ -137,7 +135,7 @@
           </div>
     <div class="hero-visual">
       <div class="hero-photo" style="background:linear-gradient(165deg,var(--navy) 0%,var(--navy2) 60%,#1B547E 130%);display:flex;align-items:center;justify-content:center;">
-        <a href="assets/exemple-rapport-visite-proxy.pdf" target="_blank" rel="noopener" style="color:#fff;font-weight:800;font-size:15px;text-align:center;padding:20px;">📄 Rapport terrain — Villa, Vamos (Apokoronas)<br><span style="font-weight:600;font-size:13px;color:rgba(255,255,255,.75);">19 pages · PDF réel · voir l'exemple</span></a>
+        <a href="assets/exemple-rapport-visite-proxy.pdf" target="_blank" rel="noopener" style="color:#fff;font-weight:800;font-size:15px;text-align:center;padding:20px;">📄 Rapport terrain — Villa, Vamos (Apokoronas)<br><span style="font-weight:600;font-size:13px;color:rgba(255,255,255,.75);">19 pages · rapport de démonstration</span></a>
       </div>
       <div class="hero-card2 float">
         <span>📄</span> Gabarit, pas un cas client réel
@@ -150,7 +148,7 @@
 <div class="reass">
   <div class="wrap reass-row">
     <div class="reass-item"><div class="reass-ic">ℹ️</div><span class="reass-txt">Ceci est un gabarit de structure, pas un rapport de client réel</span></div>
-    <div class="reass-item"><div class="reass-ic">📷</div><span class="reass-txt">Photos et vidéos prises sur place le jour de la visite</span></div>
+    <div class="reass-item"><div class="reass-ic">📷</div><span class="reass-txt">Lors d'une mission réelle : photos et vidéos prises sur place le jour de la visite</span></div>
     <div class="reass-item"><div class="reass-ic">🗣️</div><span class="reass-txt">Rédigé en français</span></div>
   </div>
 </div>
@@ -276,6 +274,10 @@
         <p class="s-p">Lien de l'annonce, zone et points à vérifier : nous confirmons le périmètre de la mission avant tout paiement.</p>
       </div>
       <form class="contact-form" id="contact-form" method="post" action="https://formsubmit.co/contact@immobilierencrete.fr">
+        <input type="hidden" name="_subject" value="Nouvelle demande ImmobilierEnCrete.fr">
+        <input type="hidden" name="_next" value="https://www.immobilierencrete.fr/merci-mission.html">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
         <input type="text" name="_hp_website" id="_hp_website" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
         <div class="field"><label for="c-nom">Nom</label><input id="c-nom" name="nom" type="text" required autocomplete="name"></div>
         <div class="field"><label for="c-email">E-mail</label><input id="c-email" name="email" type="email" required autocomplete="email"></div>
@@ -295,9 +297,9 @@
         <div class="field full"><label for="c-message">Points à vérifier</label><textarea id="c-message" name="message" placeholder="Accès, drone souhaité, délai, questions particulières..."></textarea></div>
         <div class="field full">
           <button class="btn btn-primary contact-submit" type="submit">Envoyer ma demande <span class="arrow">→</span></button>
-          <p class="contact-confirm" id="contact-confirm" hidden>Votre messagerie va s'ouvrir avec votre demande pré-remplie. Vous pouvez aussi écrire directement à contact@immobilierencrete.fr.</p>
+          <p class="contact-confirm" id="contact-confirm" role="status" aria-live="polite" hidden>Votre demande sera envoyée directement depuis ce formulaire. Aucun logiciel de messagerie n’est nécessaire.</p>
           <p class="contact-note">Réponse en français, sous 48h ouvrées. Le périmètre de toute mission est confirmé avant paiement.</p>
-          <p class="contact-note">En envoyant ce formulaire, vous acceptez le traitement de vos données pour répondre à votre demande. <a href="confidentialite.html">Politique de confidentialité</a>.</p>
+          <p class="contact-note">Les informations transmises sont utilisées uniquement pour répondre à votre demande. <a href="confidentialite.html">Politique de confidentialité</a>.</p>
         </div>
       </form>
     </div>

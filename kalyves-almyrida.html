@@ -50,9 +50,7 @@
   ]
 }
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/fonts.css">
 <link rel="stylesheet" href="site.css">
 <script src="analytics.js"></script>
 </head>
@@ -294,6 +292,10 @@
         <p style="margin-top:14px;"><a href="guide-erreurs-achat-crete.html" style="font-size:13px;font-weight:700;color:var(--blue-l);">Lire aussi : 7 erreurs à éviter en achetant à distance →</a></p>
       </div>
       <form class="contact-form" id="contact-form" method="post" action="https://formsubmit.co/contact@immobilierencrete.fr">
+        <input type="hidden" name="_subject" value="Nouvelle demande ImmobilierEnCrete.fr">
+        <input type="hidden" name="_next" value="https://www.immobilierencrete.fr/merci-mission.html">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
         <input type="text" name="_hp_website" id="_hp_website" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
         <div class="field"><label for="c-nom">Nom</label><input id="c-nom" name="nom" type="text" required autocomplete="name"></div>
         <div class="field"><label for="c-email">E-mail</label><input id="c-email" name="email" type="email" required autocomplete="email"></div>
@@ -313,9 +315,9 @@
         <div class="field full"><label for="c-message">Points à vérifier</label><textarea id="c-message" name="message" placeholder="Zone précise à Kalyves & Almyrida, accès, drone souhaité..."></textarea></div>
         <div class="field full">
           <button class="btn btn-primary contact-submit" type="submit">Envoyer ma demande <span class="arrow">→</span></button>
-          <p class="contact-confirm" id="contact-confirm" hidden>Votre messagerie va s'ouvrir avec votre demande pré-remplie. Vous pouvez aussi écrire directement à contact@immobilierencrete.fr.</p>
+          <p class="contact-confirm" id="contact-confirm" role="status" aria-live="polite" hidden>Votre demande sera envoyée directement depuis ce formulaire. Aucun logiciel de messagerie n’est nécessaire.</p>
           <p class="contact-note">Réponse en français, sous 48h ouvrées. Le périmètre de toute mission est confirmé avant paiement.</p>
-          <p class="contact-note">En envoyant ce formulaire, vous acceptez le traitement de vos données pour répondre à votre demande. <a href="confidentialite.html">Politique de confidentialité</a>.</p>
+          <p class="contact-note">Les informations transmises sont utilisées uniquement pour répondre à votre demande. <a href="confidentialite.html">Politique de confidentialité</a>.</p>
         </div>
       </form>
     </div>
